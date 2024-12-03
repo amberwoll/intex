@@ -1,17 +1,13 @@
+// Node & Express Setup
 let express = require("express");
-
 let app = express();
-
 let path = require("path");
-
 const port = process.env.PORT || 4000;
-
 app.set("view engine", "ejs");
-
 app.set("views", path.join(__dirname, "views"));
 
+// Connect to RDS 
 app.use(express.urlencoded({extended: true}));
-
 const knex = require("knex") ({
     client : "pg",
     connection : {
@@ -24,11 +20,63 @@ const knex = require("knex") ({
     }
 });
 
+// INDEX PAGE
+// Route to display index page
 app.get("/", (req, res) => {
     res.render("index"); // Automatically looks for "index.ejs" in the "views" folder
 });
 
+// HOST PAGE
+// Route to display host page
 
+// Route to save form
+
+
+
+// APPLICATION PAGE
+// Route to display application page
+
+// Route to save form
+
+
+
+// ADMIN LANDING PAGE
+// Route to display admin landing page
+
+
+
+// REQUESTED EVENTS PAGE
+// Route to display requested events page
+
+// Route to edit requests
+
+// Route to save edits
+
+
+
+// COMPLETED EVENTS PAGE
+// Route to display completed events page
+
+// Route to edit completed events
+
+// Route to save edits
+
+
+
+// VOLUNTEERS PAGE
+// Route to display volunteers page
+
+// Route to edit volunteers
+
+// Route to save edits
+
+// Route to add
+
+// Route to delete
+
+
+
+// END: DO NOT PUT ANYTHING AFTER THIS
 app.listen(port, () => {
     console.log(`Server running on port ${port}`);
   });
