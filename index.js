@@ -37,6 +37,7 @@ app.get("/", (req, res) => {
 // Route to display application page
 app.get('/application', (req, res) => {
     // Fetch reference description to populate the dropdown
+    console.log('Hello World');
     knex('reference')
         .select('reference_id', 'reference_description')
         .then(reference => {
