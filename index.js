@@ -25,14 +25,6 @@ const knex = require("knex") ({
 
 })
 
-// CHECKING BUGS?
-console.log('RDS_HOSTNAME:', process.env.RDS_HOSTNAME);
-console.log('RDS_USERNAME:', process.env.RDS_USERNAME);
-console.log('RDS_PASSWORD:', process.env.RDS_PASSWORD);
-console.log('RDS_DB_NAME:', process.env.RDS_DB_NAME);
-console.log('RDS_PORT:', process.env.RDS_PORT);
-console.log('SSL:', process.env.DB_SSL);
-
 // INDEX PAGE
 app.get("/", (req, res) => {
   res.render("index");
@@ -101,7 +93,7 @@ app.post("/application", (req, res) => {
 
 // REQUESTED EVENTS PAGE
 // Route to display requested events page
-app.get("/requested_events", (req, res) => {
+app.get("/requested_event", (req, res) => {
   knex("requested_event")
     .join('host', 'requested_event.host_id', '=', 'host.host_id')
     .join('sewing_activity', 'requested_event.sewing_abbreviation', '=', 'sewing_activity.sewing_abbreviation')
@@ -132,7 +124,7 @@ app.get("/requested_events", (req, res) => {
     })
     .catch((error) => {
       console.error("Error fetching requested events:", error.message);
-      res.status(500).send("Internal Server Error: requested_events .get");
+      res.status(500).send("Internal Server Error: requested_event .get");
     });
 });
 // Route to edit requests
