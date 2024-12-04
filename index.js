@@ -2,23 +2,28 @@
 let express = require("express");
 let app = express();
 let path = require("path");
-const port = 3000;
+const port = process.env.PORT;
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
-app.use(express.urlencoded({ extended: true }));
+// RDS Connection
+app.use(express.urlencoded({extended: true}));
+const knex = require("knex") ({
+    client : "pg",
+    connection : {
+        host : process.env.RDS_HOSTNAME,
+        user : process.env.RDS_USERNAME,
+        password : process.env.RDS_PASSWORD,
+        database : process.env.RDS_DB_NAME,
+        port : process.env.RDS_PORT,
+        ssl: {
+              require: true, 
+              rejectUnauthorized: false 
+            }
+    }
 
-const knex = require("knex")({
-  client: "pg",
-  connection: {
-    host: "localhost",
-    user: "postgres",
-    password: "Becky98004",
-    database: "ebdb",
-    port: 5433,
-  },
-});
+})
 
 // // CHECKING BUGS?
 // console.log('RDS_HOSTNAME:', process.env.RDS_HOSTNAME);
