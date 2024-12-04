@@ -68,38 +68,38 @@
         </tr>
       </thead>
       <tbody>
-        <% if (events.length > 0) { %>
-          <% events.forEach(event => { %>
+        <% if (requested_event.length > 0) { %>
+          <% events.forEach(requested_event => { %>
             <tr>
-              <td><%= event.event_number %></td>
-              <td><%= event.host_id %></td>
-              <td><%= event.event_description %></td>
-              <td><%= event.number_of_sewers %></td>
-              <td><%= event.number_of_nonsewers %></td>
-              <td><%= event.number_of_children %></td>
-              <td><%= event.sewing_abbreviation %></td>
-              <td><%= event.possible_date_1 %></td>
-              <td><%= event.possible_date_2 %></td>
-              <td><%= event.street %></td>
-              <td><%= event.city %></td>
-              <td><%= event.state %></td>
-              <td><%= event.zip %></td>
-              <td><%= event.event_length %></td>
-              <td><%= event.organization %></td>
-              <td><%= event.jen_story %></td>
+              <td><%= requested_event.event_number %></td>
+              <td><%= requested_event.host %></td>
+              <td><%= requested_event.organization %></td>
+              <td><%= requested_event.event_description %></td>
+              <td><%= requested_event.street %></td>
+              <td><%= requested_event.city %></td>
+              <td><%= requested_event.state %></td>
+              <td><%= requested_event.zip %></td>
+              <td><%= requested_event.possible_date_1 %></td>
+              <td><%= requested_event.possible_date_2 %></td>
+              <td><%= requested_event.event_length %></td>
+              <td><%= requested_event.sewing_description %></td>
+              <td><%= requested_event.number_of_sewers %></td>
+              <td><%= requested_event.number_of_nonsewers %></td>
+              <td><%= requested_event.number_of_children %></td>
+              <td><%= requested_event.machine %></td>
+              <td><%= requested_event.size_of_space %></td>
+              <td><%= requested_event.jen_story %></td>
               <td>
-                <form action="/updateEventStatus/<%= event.event_number %>" method="POST">
+                <form action="/updateEventStatus/<%= requested_event.event_number %>" method="POST">
                   <select name="status">
-                    <option value="Pending" <%= event.status === "Pending" ? "selected" : "" %>>Pending</option>
-                    <option value="Approved" <%= event.status === "Approved" ? "selected" : "" %>>Approved</option>
-                    <option value="Complete" <%= event.status === "Complete" ? "selected" : "" %>>Complete</option>
-                    <option value="Rejected" <%= event.status === "Rejected" ? "selected" : "" %>>Rejected</option>
+                    <option value="Pending" <%= requested_event.status_description === "Pending" ? "selected" : "" %>>Pending</option>
+                    <option value="Approved" <%= requested_event.status_description === "Approved" ? "selected" : "" %>>Approved</option>
+                    <option value="Complete" <%= requested_event.status_description === "Complete" ? "selected" : "" %>>Complete</option>
+                    <option value="Rejected" <%= requested_event.status_description === "Rejected" ? "selected" : "" %>>Rejected</option>
                   </select>
                   
                 </form>
               </td>
-              <td><%= event.machine %></td>
-              <td><%= event.size_of_space %></td>
               <td>
                 <button type="submit">Save</button>
                 

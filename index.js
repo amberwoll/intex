@@ -103,23 +103,30 @@ app.post("/application", (req, res) => {
 // Route to display requested events page
 app.get("/requested-events", (req, res) => {
   knex("requested_event")
+    .join('host', 'requested_event.host_id', '=', 'host.host_id')
+    .join('sewing_activity', 'requested_event.sewing_abbreviation', '=', 'sewing_activity.sewing_abbreviation')
+    .join('status', 'requested_event.status_id', '=', 'status.status_id')
     .select(
       'requested_event.event_number',
-      'requested_event.host_number',
-      'requested_event.number_of_sewers',
-      'requested_event.number_of_nonsewers',
-      'requested_event.number_of_children',
-      'requested_event.sewing_abbreviation',
-      'requested_event.possible_date_1',
-      'requested_event.possible_date_2',
+      knex.raw("CONCAT(host.first_name, ' ', host.last_name) AS host"),
+      'requested_event.organization',
+      'requested_event.description',
       'requested_event.street',
       'requested_event.city',
       'requested_event.state',
       'requested_event.zip',
+      'requested_event.possible_date_1',
+      'requested_event.possible_date_2',
       'requested_event.event_length',
-      'requested_event.organization',
-      'requested_event.event_number',
-      'requested_event.jen_story'
+      'sewing_activity.sewing_description',
+      'requested_event.number_of_sewers',
+      'requested_event.number_of_nonsewers',
+      'requested_event.number_of_children',
+      'requested_event.machine',      
+      'requested_event.jen_story',
+      'requested_event.jen_story',
+      'status.status_description' 
+      
     )
     .then((requested_events) => {
       res.render("requested_events", { requested_events });
