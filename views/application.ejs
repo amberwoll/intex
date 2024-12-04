@@ -43,7 +43,7 @@
             id="volunteer_email"
             name="volunteer_email"
             required
-        >
+        ><br>
         <!-- Location -->
         <label for="city">What City Are You Located In: </label>
         <input
@@ -60,8 +60,7 @@
             id="zip"
             name="zip"
             required
-        
-        >
+        ><br>
 
         <!-- Sewing Skill level -->
         <label>Select Your Sewing Skill Level</label>
@@ -73,8 +72,7 @@
         </label>
         <label>
             <input type="radio" name="sewing_level" value=3> Advanced
-        </label>
-
+        </label><br>
 
         <!-- How Did You Find Us -->
         <label for="reference_id">How Did You Find Us?</label>
@@ -83,7 +81,7 @@
             <% reference.forEach(type => { %>
                 <option value="<%= type.reference_id %>"><%= type.reference_description %></option>
             <% }) %>
-        </select>
+        </select><br>
 
         <!-- Monthly Hours -->
         <label for="number_of_hours">How Many Hours, on Average, Would You Like to Volunteer, Monthly? </label>
@@ -93,13 +91,13 @@
             id="number_of_hours"
             name="number_of_hours"
             required  
-        >
+        ><br>
 
         <!-- Email List (Checkbox) -->
         <label for="email_list">
             <input type="checkbox" id="email_list" name="email_list" value="true">
             Would You Like to Receive Monthly Email Updates?
-        </label>
+        </label><br>
 
         <!-- Activity Preference -->
         <label>What Activity Type Are You Most Interested in?</label>
@@ -111,7 +109,7 @@
         </label>
         <label>
             <input type="radio" name="sewing_abbreviation" value='B'> Both
-        </label>
+        </label><br>
 
         <!-- Activity Preference -->
         <label>Once Trained, Would You be Comfortable Leading a Service Event?</label>
@@ -120,7 +118,7 @@
         </label>
         <label>
             <input type="radio" name="leadership" value='false' > No
-        </label>
+        </label><br>
 
         <!-- Submit Button -->
         <button type="submit">Submit Application</button>
