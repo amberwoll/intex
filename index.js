@@ -25,13 +25,13 @@ const knex = require("knex") ({
 
 })
 
-// // CHECKING BUGS?
-// console.log('RDS_HOSTNAME:', process.env.RDS_HOSTNAME);
-// console.log('RDS_USERNAME:', process.env.RDS_USERNAME);
-// console.log('RDS_PASSWORD:', process.env.RDS_PASSWORD);
-// console.log('RDS_DB_NAME:', process.env.RDS_DB_NAME);
-// console.log('RDS_PORT:', process.env.RDS_PORT);
-// console.log('SSL:', process.env.DB_SSL);
+// CHECKING BUGS?
+console.log('RDS_HOSTNAME:', process.env.RDS_HOSTNAME);
+console.log('RDS_USERNAME:', process.env.RDS_USERNAME);
+console.log('RDS_PASSWORD:', process.env.RDS_PASSWORD);
+console.log('RDS_DB_NAME:', process.env.RDS_DB_NAME);
+console.log('RDS_PORT:', process.env.RDS_PORT);
+console.log('SSL:', process.env.DB_SSL);
 
 // INDEX PAGE
 app.get("/", (req, res) => {
@@ -55,6 +55,7 @@ app.get('/application', (req, res) => {
         });
 });
 
+// Route to save application to database
 app.post("/application", (req, res) => {
     const first_name = req.body.first_name || ''; // Default to empty string if not provided
     const last_name = req.body.last_name || ''; 
@@ -98,30 +99,8 @@ app.post("/application", (req, res) => {
 // Route to display admin landing page
 
 
-  knex("volunteer")
-    .insert({
-      first_name: first_name.toUpperCase(),
-      last_name: last_name.toUpperCase(),
-      phone,
-      volunteer_email,
-      city: city.toUpperCase(),
-      zip,
-      sewing_level: parseInt(sewing_level, 10),
-      reference_id: parseInt(reference_id, 10),
-      number_of_hours: parseInt(number_of_hours, 10),
-      email_list: email_list === "true",
-      sewing_abbreviation,
-      leadership,
-    })
-    .then(() => {
-      res.redirect("/volunteers");
-    })
-    .catch((error) => {
-      console.error("Error adding volunteer:", error.message);
-      res.status(500).send("Internal Server Error");
-    });
-
 // REQUESTED EVENTS PAGE
+// Route to display requested events page
 app.get("/requested-events", (req, res) => {
   knex("requested_events")
     .select("*")
@@ -133,12 +112,9 @@ app.get("/requested-events", (req, res) => {
       res.status(500).send("Internal Server Error");
     });
 });
-// Route to display requested events page
-
 // Route to edit requests
 
 // Route to save edits
-
 
 
 // COMPLETED EVENTS PAGE
@@ -217,10 +193,8 @@ app.post('/save_completed_events/:event_number', (req, res) => {
     });
 });
 
-
-
-
 // VOLUNTEERS PAGE
+// Route to display the volunteers page
 app.get("/volunteers", (req, res) => {
   knex("volunteer")
     .select("*")
@@ -233,22 +207,23 @@ app.get("/volunteers", (req, res) => {
     });
 });
 
+// Route to delete volunteer
+// BROKEN!!!!
+// app.post("/deleteVolunteer/:id", (req, res) => {
+//   const { id } = req.params; // Extract the ID from the route parameters
+//   console.log("Attempting to delete volunteer with ID:", id); // Debug log
 
-app.post("/deleteVolunteer/:id", (req, res) => {
-  const { id } = req.params; // Extract the ID from the route parameters
-  console.log("Attempting to delete volunteer with ID:", id); // Debug log
-
-  knex("volunteer")
-    .where("volunteer_id", id) // Ensure "volunteer_id" matches your DB schema
-    .del()
-    .then(() => {
-      res.redirect("/volunteers");
-    })
-    .catch((error) => {
-      console.error("Error deleting volunteer:", error.message);
-      res.status(500).send("Internal Server Error");
-    });
-});
+//   knex("volunteer")
+//     .where("volunteer_id", id) // Ensure "volunteer_id" matches your DB schema
+//     .del()
+//     .then(() => {
+//       res.redirect("/volunteers");
+//     })
+//     .catch((error) => {
+//       console.error("Error deleting volunteer:", error.message);
+//       res.status(500).send("Internal Server Error");
+//     });
+// });
 
 // Route to display the edit page
 app.get("/editVolunteer/:id", (req, res) => {
@@ -268,7 +243,9 @@ app.get("/editVolunteer/:id", (req, res) => {
       res.status(500).send("Internal Server Error");
     });
 });
-// Route to handle the edit form submission
+
+// Route to edit volunteer
+// INCOMPLETE - NEED FIX
 app.post("/editVolunteer/:id", (req, res) => {
   const { id } = req.params;
   const { first_name, last_name, phone, city, zip, sewing_level } = req.body;
