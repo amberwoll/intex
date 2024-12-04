@@ -16,7 +16,7 @@ const knex = require("knex") ({
         password : process.env.RDS_PASSWORD || PASSWORD,
         database : process.env.RDS_DB_NAME || DB_NAME,
         port : process.env.RDS_PORT || PORT,
-        ssl : process.env.DB_SSL ? {rejectUnauthorized: false} : true
+        ssl : true
     }
 });
 
@@ -52,8 +52,44 @@ app.get('/application', (req, res) => {
 });
 
 // Route to save form
+app.post("/application", (req, res) => {
+    const first_name = req.body.first_name || ''; // Default to empty string if not provided
+    const last_name = req.body.last_name || ''; 
+    const phone = req.body.phone || '';
+    const volunteer_email = req.body.volunteer_email || '';
+    const city = req.body.city || '';
+    const zip = req.body.zip || '';
+    const sewing_level = parseInt(req.body.sewing_level, 10);
+    const reference_id = parseInt(req.body.reference_id, 10);
+    const number_of_hours = parseInt(req.body.number_of_hours, 10)
+    const email_list = req.body.email_list === 'true' ;                 // True or undefined
+    const sewing_abbreviation = req.body.sewing_abbreviation || 'S';    // Default to "S" for sewing
+    const leadership = req.body.leadership || 'true';                   // Default to true
 
+    knex("volunteer")
+      .insert({
+        first_name: first_name.toUpperCase(),
+        last_name: last_name.toUpperCase(),
+        phone: phone,
+        volunteer_email: volunteer_email,
+        city: city.toUpperCase(),
+        zip: zip,
+        sewing_level: sewing_level,
+        reference_id: reference_id,
+        number_of_hours: number_of_hours,
+        email_list: email_list,
+        sewing_abbreviation: sewing_abbreviation,
+        leadership: leadership
 
+      })
+      .then(() => {
+        res.redirect("/");
+      })
+      .catch((error) => {
+        console.error("Error adding volunteer:", error);
+        res.status(500).send("Internal Server Error: Application .post");
+      });
+  });
 
 // ADMIN LANDING PAGE
 // Route to display admin landing page
