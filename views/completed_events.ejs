@@ -26,7 +26,7 @@
             <td><%= row.event_description %></td>
             <td><%= row.organization %></td>
             <td>
-              <form action="/edit_completed_event/<%= row.event_number %>" method="GET" style="display:inline;">
+              <form action="/update_completed_events/<%= row.event_number %>" method="GET" style="display:inline;">
                 <button type="submit">Update</button>
               </form>
             </td>

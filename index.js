@@ -136,8 +136,59 @@ app.get('/completed_events', (req, res) => {
     });
 });
 // Route to edit completed events
+app.get('/update_completed_events/:event_number', (req, res) => {
+  let event_number = req.params.event_number;
+  // Collect event details from requested_event
+  knex('requested_event')
+    .where('event_number', event_number)
+    .first() // Get single event
+    .then(requested_event => {
+      if (!requested_event) {
+        return res.status(404).send('Event not found');
+      }
+      // Render the edit form, passing the event details
+      res.render('update_completed_events', { requested_event });
+    })
+    .catch(error => {
+      console.error('Error fetching requested event:', error);
+      res.status(500).send('Internal Server Error: update_completed_events .get');
+    });
+});
+// Route to save completed event update
+app.post('/save_completed_events/:event_number', (req, res) => {
+  const event_number = req.params.event_number;
+  const {
+    event_start,
+    number_of_participants,
+    event_duration,
+    pockets_produced,
+    envelopes_produced,
+    collars_produced,
+    vests_produced,
+    completed_products
+  } = req.body;
 
-// Route to save edits
+  knex('completed_event')
+    .insert({
+      event_number,
+      event_start,
+      number_of_participants,
+      event_duration,
+      pockets_produced,
+      envelopes_produced,
+      collars_produced,
+      vests_produced,
+      completed_products
+    })
+    .then(() => {
+      res.redirect('/completed_events'); // Redirect to completed events list
+    })
+    .catch(error => {
+      console.error('Error saving completed event:', error);
+      res.status(500).send('Internal Server Error: save_completed_events .post');
+    });
+});
+
 
 
 
