@@ -103,7 +103,7 @@ app.get("/requested_event", (req, res) => {
       'requested_event.event_number',
       knex.raw("CONCAT(host.first_name, ' ', host.last_name) AS host"),
       'requested_event.organization',
-      'requested_event.description',
+      'requested_event.event_description',
       'requested_event.street',
       'requested_event.city',
       'requested_event.state',
