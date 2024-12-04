@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Completed Event</title>
+</head>
+<body>
+    <h1>Update Completed Event</h1>
+    <form action="/save_completed_events/<%= requested_event.event_number %>" method="POST">
+        <!-- Event Start -->
+        <label for="event_start">What Time did the Event Start:</label>
+        <input type="datetime-local" id="event_start" name="event_start" required><br>
+
+        <!-- Number of Participants -->
+        <label for="number_of_participants">How Many Participants Attended:</label>
+        <input type="number" id="number_of_participants" name="number_of_participants" required><br>
+
+        <!-- Event Duration -->
+        <label for="event_duration">How Long did the Event Last, in Hours:</label>
+        <input type="number" step="0.1" id="event_duration" name="event_duration" required><br>
+
+        <!-- Pockets Produced -->
+        <label for="pockets_produced">How Many Pockets Were Produced:</label>
+        <input type="number" id="pockets_produced" name="pockets_produced" required><br>
+
+        <!-- Envelopes Produced -->
+        <label for="envelopes_produced">How Many Envelopes Were Produced:</label>
+        <input type="number" id="envelopes_produced" name="envelopes_produced" required><br>
+
+        <!-- Collars Produced -->
+        <label for="collars_produced">How Many Collars Were Produced:</label>
+        <input type="number" id="collars_produced" name="collars_produced" required><br>
+
+        <!-- Vests Produced -->
+        <label for="vests_produced">How Many Vests Were Produced:</label>
+        <input type="number" id="vests_produced" name="vests_produced" required><br>
+
+        <!-- Completed Products -->
+        <label for="completed_products">How Many Products Were Completed:</label>
+        <input type="number" id="completed_products" name="completed_products" required><br>
+
+        <button type="submit">Save Completed Event</button>
+    </form>
+</body>
+</html>
