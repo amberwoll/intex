@@ -12,14 +12,14 @@
       border: 1px solid #ccc;
       border-radius: 10px;
       background-color: #F9F9F9;
-      font-size: 12px;
+      font-size: 14px;
     }
     label {
       display: block;
       margin-bottom: 8px;
       font-weight: bold;
     }
-    input, button {
+    input, select, button {
       width: 100%;
       padding: 8px;
       margin-bottom: 15px;
@@ -40,14 +40,33 @@
 <body>
   <h1 style="text-align: center;">Edit Volunteer</h1>
   <form action="/editVolunteer/<%= volunteer.volunteer_id %>" method="POST">
+
     <label for="first_name">First Name</label>
     <input type="text" id="first_name" name="first_name" value="<%= volunteer.first_name %>" required>
 
     <label for="last_name">Last Name</label>
     <input type="text" id="last_name" name="last_name" value="<%= volunteer.last_name %>" required>
 
+    <label for="sewing_level">Sewing Level</label>
+    <input type="number" id="sewing_level" name="sewing_level" value="<%= volunteer.sewing_level %>" required>
+
     <label for="phone">Phone</label>
     <input type="text" id="phone" name="phone" value="<%= volunteer.phone %>" required>
+
+    <label for="reference_id">Reference ID</label>
+    <input type="number" id="reference_id" name="reference_id" value="<%= volunteer.reference_id %>" required>
+
+    <label for="number_of_hours">Number of Hours</label>
+    <input type="number" id="number_of_hours" name="number_of_hours" value="<%= volunteer.number_of_hours %>" required>
+
+    <label for="email_list">Email List</label>
+    <select id="email_list" name="email_list" required>
+      <option value="true" <%= volunteer.email_list ? "selected" : "" %>>Yes</option>
+      <option value="false" <%= !volunteer.email_list ? "selected" : "" %>>No</option>
+    </select>
+
+    <label for="volunteer_email">Volunteer Email</label>
+    <input type="email" id="volunteer_email" name="volunteer_email" value="<%= volunteer.volunteer_email %>" required>
 
     <label for="city">City</label>
     <input type="text" id="city" name="city" value="<%= volunteer.city %>" required>
@@ -55,8 +74,14 @@
     <label for="zip">Zip</label>
     <input type="text" id="zip" name="zip" value="<%= volunteer.zip %>" required>
 
-    <label for="sewing_level">Sewing Level</label>
-    <input type="number" id="sewing_level" name="sewing_level" value="<%= volunteer.sewing_level %>" required>
+    <label for="preference">Preference</label>
+    <input type="text" id="preference" name="preference" value="<%= volunteer.preference %>" required>
+
+    <label for="leadership">Leadership</label>
+    <select id="leadership" name="leadership" required>
+      <option value="true" <%= volunteer.leadership ? "selected" : "" %>>Yes</option>
+      <option value="false" <%= !volunteer.leadership ? "selected" : "" %>>No</option>
+    </select>
 
     <button type="submit">Save Changes</button>
   </form>
