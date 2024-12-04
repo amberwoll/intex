@@ -4,8 +4,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Completed Events</title>
 </head>
 <body>
+    <h1 style="text-align: center;">Update Completed Events</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Event Number</th>
+        <th>Start Time</th>
+        <th>Number of Participants</th>
+        <th>Event Duration (Hours)</th>
+        <th>Pockets Produced</th>
+        <th>Envelopes Produced</th>
+        <th>Collars Produced</th>
+        <th>Vests Produced</th>
+        <th>Completed Products</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% if (completed_event.length > 0) { %>
+        <% completed_event.forEach(row => { %>
+          <tr>
+            <td><%= row.event_number %></td>
+            <td><%= row.event_start %></td>
+            <td><%= row.number_of_participants %></td>
+            <td><%= row.event_duration %></td>
+            <td><%= row.pockets_produced %></td>
+            <td><%= row.envelopes_produced %></td>
+            <td><%= row.collars_produced %></td>
+            <td><%= row.vests_produced %></td>
+            <td><%= row.completed_products %></td>
+            <td>
+              <form action="/edit_completed_event/<%= row.event_number %>" method="GET" style="display:inline;">
+                <button type="submit">Update</button>
+              </form>
+            </td>
+          </tr>
+        <% }) %>
+      <% } else { %>
+        <tr>
+          <td colspan="7">No data available</td>
+        </tr>
+      <% } %>
+    </tbody>
+  </table>
 </body>
 </html>
