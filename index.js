@@ -127,8 +127,8 @@ app.get("/requested_events", (req, res) => {
       'requested_event.jen_story',
       'status.status_description' 
     )
-    .then((requested_events) => {
-      res.render("requested_events", { requested_events });
+    .then((requested_event) => {
+      res.render("requested_event", { requested_event });
     })
     .catch((error) => {
       console.error("Error fetching requested events:", error.message);
