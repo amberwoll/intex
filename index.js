@@ -16,7 +16,10 @@ const knex = require("knex") ({
         password : process.env.RDS_PASSWORD,
         database : process.env.RDS_DB_NAME,
         port : process.env.RDS_PORT,
-        ssl: process.env.DB_SSL ? { rejectUnauthorized: false } : false
+        ssl: {
+              require: true, // This will help you. But you will see nwe error
+              rejectUnauthorized: false // This line will fix new error
+            }
     }
 
 });
@@ -27,6 +30,7 @@ console.log('RDS_PASSWORD:', process.env.RDS_PASSWORD);
 console.log('RDS_DB_NAME:', process.env.RDS_DB_NAME);
 console.log('RDS_PORT:', process.env.RDS_PORT);
 console.log('SSL:', process.env.DB_SSL);
+
 // INDEX PAGE
 // Route to display index page
 app.get("/", (req, res) => {
