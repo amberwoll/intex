@@ -35,6 +35,19 @@ app.get("/", (req, res) => {
 
 // APPLICATION PAGE
 // Route to display application page
+app.get('/application', (req, res) => {
+    // Fetch reference description to populate the dropdown
+    knex('reference')
+        .select('reference_id', 'reference_description')
+        .then(reference => {
+            // Render the application form with the reference description types
+            res.render('application', { reference });
+        })
+        .catch(error => {
+            console.error('Error fetching reference types:', error);
+            res.status(500).send('Internal Server Error: Reference.get');
+        });
+});
 
 // Route to save form
 
