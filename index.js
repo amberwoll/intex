@@ -101,7 +101,7 @@ app.post("/application", (req, res) => {
 
 // REQUESTED EVENTS PAGE
 // Route to display requested events page
-app.get("/requested-events", (req, res) => {
+app.get("/requested_events", (req, res) => {
   knex("requested_event")
     .join('host', 'requested_event.host_id', '=', 'host.host_id')
     .join('sewing_activity', 'requested_event.sewing_abbreviation', '=', 'sewing_activity.sewing_abbreviation')
@@ -126,7 +126,6 @@ app.get("/requested-events", (req, res) => {
       'requested_event.jen_story',
       'requested_event.jen_story',
       'status.status_description' 
-      
     )
     .then((requested_events) => {
       res.render("requested_events", { requested_events });
