@@ -6,7 +6,7 @@ const port = process.env.PORT;
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
-// RDS DATABASE
+// Connect to RDS 
 app.use(express.urlencoded({extended: true}));
 const knex = require("knex") ({
     client : "pg",
