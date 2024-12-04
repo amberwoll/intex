@@ -13,7 +13,7 @@
 
     <!-- <form action="/addPoke" method="POST"> -->
     <form>
-        <!-- contact info -->
+        <!-- Contact Info -->
         <label for="first_name">First Name: </label>
         <input
             type="text"
@@ -23,7 +23,6 @@
             style="text-transform: uppercase;"
             oninput="this.value = this.value.toUpperCase()"
         >
-
         <label for="last_name">Last Name: </label>
         <input
             type="text"
@@ -33,25 +32,21 @@
             style="text-transform: uppercase;"
             oninput="this.value = this.value.toUpperCase()"
         >
-
         <label for="phone">Phone Number: </label>
         <input
             type="text"
             id="phone"
             name="phone"
-            required
-            
+            required  
         >
-        
         <label for="email">Email: </label>
         <input
             type="text"
             id="email"
             name="email"
             required
-        
         >
-        <!-- location -->
+        <!-- Location -->
         <label for="city">What City Are You Located In: </label>
         <input
             type="text"
@@ -82,7 +77,7 @@
         </label>
 
 
-        <!-- how did you find us -->
+        <!-- How Did You Find Us -->
         <label for="reference_id">How Did You Find Us?</label>
         <select id="reference_id" name="reference_id" required>
             <!--* this is variable -->
@@ -91,26 +86,24 @@
             <% }) %>
         </select>
 
-        <!-- monthly hours -->
-        <label for="number_of_hours">How many Hours, on average, would you like to volunteer, monthly? </label>
+        <!-- Monthly Hours -->
+        <label for="number_of_hours">How Many Hours, on Average, Would You Like to Volunteer, Monthly? </label>
         <input
-            type="float"
+            type="number"
+            step="0.5"
             id="number_of_hours"
             name="number_of_hours"
-            required
-            
+            required  
         >
-
 
         <!-- Email List (Checkbox) -->
         <label for="email_list">
             <input type="checkbox" id="email_list" name="email_list" value="true">
-            Would you like to receive monthly email updates?
+            Would You Like to Receive Monthly Email Updates?
         </label>
 
-
         <!-- Activity Preference -->
-        <label>What activity are you most interested in?</label>
+        <label>What Activity Type Are You Most Interested in?</label>
         <label>
             <input type="radio" name="sewing_abbreviation" value='S' checked> Sewing
         </label>
@@ -121,17 +114,14 @@
             <input type="radio" name="sewing_abbreviation" value='B'> Both
         </label>
 
-
         <!-- Activity Preference -->
-        <label>Once trained, would you be comfortable leading a service event?</label>
+        <label>Once Trained, Would You be Comfortable Leading a Service Event?</label>
         <label>
             <input type="radio" name="sewing_abbreviation" value='true' checked> Yes
         </label>
         <label>
             <input type="radio" name="sewing_abbreviation" value='false' > No
         </label>
-
-
 
         <!-- Submit Button -->
         <button type="submit">Submit Application</button>
