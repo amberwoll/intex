@@ -109,7 +109,7 @@ app.get("/requested-events", (req, res) => {
     })
     .catch((error) => {
       console.error("Error fetching requested events:", error.message);
-      res.status(500).send("Internal Server Error");
+      res.status(500).send("Internal Server Error 0.5");
     });
 });
 // Route to edit requests
@@ -203,7 +203,7 @@ app.get("/volunteers", (req, res) => {
     })
     .catch((error) => {
       console.error("Error fetching volunteers:", error.message);
-      res.status(500).send("Internal Server Error");
+      res.status(500).send("Internal Server Error 1");
     });
 });
 
@@ -240,7 +240,7 @@ app.get("/editVolunteer/:id", (req, res) => {
     })
     .catch((error) => {
       console.error("Error fetching volunteer:", error.message);
-      res.status(500).send("Internal Server Error");
+      res.status(500).send("Internal Server Error 2");
     });
 });
 
@@ -266,7 +266,7 @@ app.post("/editVolunteer/:id", (req, res) => {
     })
     .catch((error) => {
       console.error("Error updating volunteer:", error.message);
-      res.status(500).send("Internal Server Error");
+      res.status(500).send("Internal Server Error 3");
     });
 });
 
