@@ -68,43 +68,49 @@
         </tr>
       </thead>
       <tbody>
-        <% events.forEach(event => { %>
-          <tr>
-            <td><%= event.event_number %></td>
-            <td><%= event.host_id %></td>
-            <td><%= event.event_description %></td>
-            <td><%= event.number_of_sewers %></td>
-            <td><%= event.number_of_nonsewers %></td>
-            <td><%= event.number_of_children %></td>
-            <td><%= event.sewing_abbreviation %></td>
-            <td><%= event.possible_date_1 %></td>
-            <td><%= event.possible_date_2 %></td>
-            <td><%= event.street %></td>
-            <td><%= event.city %></td>
-            <td><%= event.state %></td>
-            <td><%= event.zip %></td>
-            <td><%= event.event_length %></td>
-            <td><%= event.organization %></td>
-            <td><%= event.jen_story %></td>
-            <td>
-              <form action="/updateEventStatus/<%= event.event_number %>" method="POST">
-                <select name="status">
-                  <option value="Pending" <%= event.status === "Pending" ? "selected" : "" %>>Pending</option>
-                  <option value="Approved" <%= event.status === "Approved" ? "selected" : "" %>>Approved</option>
-                  <option value="Complete" <%= event.status === "Complete" ? "selected" : "" %>>Complete</option>
-                  <option value="Rejected" <%= event.status === "Rejected" ? "selected" : "" %>>Rejected</option>
-                </select>
+        <% if (events.length > 0) { %>
+          <% events.forEach(event => { %>
+            <tr>
+              <td><%= event.event_number %></td>
+              <td><%= event.host_id %></td>
+              <td><%= event.event_description %></td>
+              <td><%= event.number_of_sewers %></td>
+              <td><%= event.number_of_nonsewers %></td>
+              <td><%= event.number_of_children %></td>
+              <td><%= event.sewing_abbreviation %></td>
+              <td><%= event.possible_date_1 %></td>
+              <td><%= event.possible_date_2 %></td>
+              <td><%= event.street %></td>
+              <td><%= event.city %></td>
+              <td><%= event.state %></td>
+              <td><%= event.zip %></td>
+              <td><%= event.event_length %></td>
+              <td><%= event.organization %></td>
+              <td><%= event.jen_story %></td>
+              <td>
+                <form action="/updateEventStatus/<%= event.event_number %>" method="POST">
+                  <select name="status">
+                    <option value="Pending" <%= event.status === "Pending" ? "selected" : "" %>>Pending</option>
+                    <option value="Approved" <%= event.status === "Approved" ? "selected" : "" %>>Approved</option>
+                    <option value="Complete" <%= event.status === "Complete" ? "selected" : "" %>>Complete</option>
+                    <option value="Rejected" <%= event.status === "Rejected" ? "selected" : "" %>>Rejected</option>
+                  </select>
+                  
+                </form>
+              </td>
+              <td><%= event.machine %></td>
+              <td><%= event.size_of_space %></td>
+              <td>
+                <button type="submit">Save</button>
                 
-              </form>
-            </td>
-            <td><%= event.machine %></td>
-            <td><%= event.size_of_space %></td>
-            <td>
-              <button type="submit">Save</button>
-              
-            </td>
+              </td>
+            </tr>
+          <% }) %>
+        <% } else { %>
+          <tr>
+            <td colspan="7">No data available</td>
           </tr>
-        <% }) %>
+        <% } %>
       </tbody>
     </table>
   </body>

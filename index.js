@@ -102,14 +102,31 @@ app.post("/application", (req, res) => {
 // REQUESTED EVENTS PAGE
 // Route to display requested events page
 app.get("/requested-events", (req, res) => {
-  knex("requested_events")
-    .select("*")
-    .then((events) => {
-      res.render("requested_events", { events });
+  knex("requested_event")
+    .select(
+      'requested_event.event_number',
+      'requested_event.host_number',
+      'requested_event.number_of_sewers',
+      'requested_event.number_of_nonsewers',
+      'requested_event.number_of_children',
+      'requested_event.sewing_abbreviation',
+      'requested_event.possible_date_1',
+      'requested_event.possible_date_2',
+      'requested_event.street',
+      'requested_event.city',
+      'requested_event.state',
+      'requested_event.zip',
+      'requested_event.event_length',
+      'requested_event.organization',
+      'requested_event.event_number',
+      'requested_event.jen_story'
+    )
+    .then((requested_events) => {
+      res.render("requested_events", { requested_events });
     })
     .catch((error) => {
       console.error("Error fetching requested events:", error.message);
-      res.status(500).send("Internal Server Error 0.5");
+      res.status(500).send("Internal Server Error: requested_events .get");
     });
 });
 // Route to edit requests
