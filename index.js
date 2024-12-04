@@ -2,34 +2,32 @@
 let express = require("express");
 let app = express();
 let path = require("path");
-const port = process.env.PORT;
+
+// MAYA'S LOCAL PORT
+const port = 3000
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
-// Connect to RDS 
-app.use(express.urlencoded({extended: true}));
-const knex = require("knex") ({
+// MAYA'S LOCAL DATABASE
+app.use(express.urlencoded({extended: true})); // get data from form
+const knex = require("knex") ({ 
     client : "pg",
     connection : {
-        host : process.env.RDS_HOSTNAME,
-        user : process.env.RDS_USERNAME,
-        password : process.env.RDS_PASSWORD,
-        database : process.env.RDS_DB_NAME,
-        port : process.env.RDS_PORT,
-        ssl: {
-              require: true, 
-              rejectUnauthorized: false 
-            }
+        host : "localhost",
+        user : "postgres",
+        password : "admin",
+        database : "INTEX_LOCAL",
+        port : 5432
     }
-
 });
 
-console.log('RDS_HOSTNAME:', process.env.RDS_HOSTNAME);
-console.log('RDS_USERNAME:', process.env.RDS_USERNAME);
-console.log('RDS_PASSWORD:', process.env.RDS_PASSWORD);
-console.log('RDS_DB_NAME:', process.env.RDS_DB_NAME);
-console.log('RDS_PORT:', process.env.RDS_PORT);
-console.log('SSL:', process.env.DB_SSL);
+// // CHECKING BUGS?
+// console.log('RDS_HOSTNAME:', process.env.RDS_HOSTNAME);
+// console.log('RDS_USERNAME:', process.env.RDS_USERNAME);
+// console.log('RDS_PASSWORD:', process.env.RDS_PASSWORD);
+// console.log('RDS_DB_NAME:', process.env.RDS_DB_NAME);
+// console.log('RDS_PORT:', process.env.RDS_PORT);
+// console.log('SSL:', process.env.DB_SSL);
 
 // INDEX PAGE
 // Route to display index page
@@ -48,7 +46,6 @@ app.get("/", (req, res) => {
 // Route to display application page
 app.get('/application', (req, res) => {
     // Fetch reference description to populate the dropdown
-    console.log('Hello World');
     knex('reference')
         .select('reference_id', 'reference_description')
         .then(reference => {
@@ -89,7 +86,7 @@ app.post("/application", (req, res) => {
         reference_id: reference_id,
         number_of_hours: number_of_hours,
         email_list: email_list,
-        sewing_abbreviation: sewing_abbreviation,
+        preference: sewing_abbreviation,
         leadership: leadership
 
       })
