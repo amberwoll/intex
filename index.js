@@ -41,6 +41,7 @@ app.get('/application', (req, res) => {
         .select('reference_id', 'reference_description')
         .then(reference => {
             // Render the application form with the reference description types
+            console.log('Hello World');
             res.render('application', { reference });
         })
         .catch(error => {
