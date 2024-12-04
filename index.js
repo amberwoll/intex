@@ -2,23 +2,26 @@
 let express = require("express");
 let app = express();
 let path = require("path");
-
-// MAYA'S LOCAL PORT
-const port = 3000
+const port = process.env.PORT;
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
-// MAYA'S LOCAL DATABASE
-app.use(express.urlencoded({extended: true})); // get data from form
-const knex = require("knex") ({ 
+// Connect to RDS 
+app.use(express.urlencoded({extended: true}));
+const knex = require("knex") ({
     client : "pg",
     connection : {
-        host : "localhost",
-        user : "postgres",
-        password : "admin",
-        database : "INTEX_LOCAL",
-        port : 5432
+        host : process.env.RDS_HOSTNAME,
+        user : process.env.RDS_USERNAME,
+        password : process.env.RDS_PASSWORD,
+        database : process.env.RDS_DB_NAME,
+        port : process.env.RDS_PORT,
+        ssl: {
+              require: true, 
+              rejectUnauthorized: false 
+            }
     }
+
 });
 
 // // CHECKING BUGS?
