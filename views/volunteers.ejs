@@ -1,12 +1,131 @@
-<!-- Page to display all team members -->
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Volunteer Records</title>
+    <style>
+      table {
+        width: 100%;
+        margin: 20px auto;
+        border-collapse: collapse;
+        font-size: 14px;
+      }
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: center;
+        line-height: 1.4;
+      }
+      th {
+        background-color: #f9f9f9;
+        font-weight: bold;
+      }
+      button {
+        padding: 6px 12px;
+        font-size: 14px;
+        cursor: pointer;
+        margin: 2px;
+      }
+      h1 {
+        text-align: center;
+        margin: 20px 0;
+      }
+      .form-buttons {
+        display: flex;
+        justify-content: center;
+        margin: 20px 0;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Volunteer Records</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>Volunteer ID</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Sewing Level</th>
+          <th>Phone</th>
+          <th>Reference ID</th>
+          <th>Number of Hours</th>
+          <th>Email List</th>
+          <th>Volunteer Email</th>
+          <th>City</th>
+          <th>Zip</th>
+          <th>Preference</th>
+          <th>Leadership</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if (volunteers.length > 0) { %>
+          <% volunteers.forEach(volunteer => { %>
+            <tr>
+              <td><%= volunteer.volunteer_id %></td>
+              <td><%= volunteer.first_name %></td>
+              <td><%= volunteer.last_name %></td>
+              <td><%= volunteer.sewing_level %></td>
+              <td><%= volunteer.phone %></td>
+              <td><%= volunteer.reference_id %></td>
+              <td><%= volunteer.number_of_hours %></td>
+              <td><%= volunteer.email_list %></td>
+              <td><%= volunteer.volunteer_email %></td>
+              <td><%= volunteer.city %></td>
+              <td><%= volunteer.zip %></td>
+              <td><%= volunteer.preference %></td>
+              <td><%= volunteer.leadership %></td>
+              <td>
+                <!-- Edit Button -->
+                <form
+                  action="/editVolunteer/<%= volunteer.volunteer_id %>"
+                  method="GET"
+                  style="display: inline"
+                >
+                  <button type="submit">Edit</button>
+                </form>
+                <!-- Delete Button -->
+                <form
+                  action="/deleteVolunteer/<%= volunteer.volunteer_id %>"
+                  method="POST"
+                  style="display: inline;"
+                >
+                  <button
+                    type="submit"
+                    aria-label="Delete Volunteer"
+                    onclick="return confirm('Are you sure you want to delete this volunteer? This action cannot be undone.');"
+                    style="
+                      background-color: #e74c3c;
+                      color: white;
+                      border: none;
+                      padding: 6px 12px;
+                      font-size: 14px;
+                      cursor: pointer;
+                      border-radius: 4px;
+                    "
+                  >
+                    Delete
+                  </button>
+                </form>
+              </td>
+            </tr>
+          <% }) %>
+        <% } else { %>
+          <tr>
+            <td colspan="14">No data available</td>
+          </tr>
+        <% } %>
+      </tbody>
+    </table>
+    <div class="form-buttons">
+      <form action="/addVolunteer" method="GET">
+        <button type="submit">Add New Volunteer</button>
+      </form>
+      <form action="/" method="GET">
+        <button type="submit">Home</button>
+      </form>
+    </div>
+  </body>
 </html>

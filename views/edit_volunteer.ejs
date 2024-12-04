@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit Volunteer</title>
+  <style>
+    form {
+      width: 50%;
+      margin: 20px auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      background-color: #F9F9F9;
+      font-size: 12px;
+    }
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+    input, button {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    button {
+      background-color: #4CAF50;
+      color: white;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #45A049;
+    }
+  </style>
+</head>
+<body>
+  <h1 style="text-align: center;">Edit Volunteer</h1>
+  <form action="/editVolunteer/<%= volunteer.volunteer_id %>" method="POST">
+    <label for="first_name">First Name</label>
+    <input type="text" id="first_name" name="first_name" value="<%= volunteer.first_name %>" required>
+
+    <label for="last_name">Last Name</label>
+    <input type="text" id="last_name" name="last_name" value="<%= volunteer.last_name %>" required>
+
+    <label for="phone">Phone</label>
+    <input type="text" id="phone" name="phone" value="<%= volunteer.phone %>" required>
+
+    <label for="city">City</label>
+    <input type="text" id="city" name="city" value="<%= volunteer.city %>" required>
+
+    <label for="zip">Zip</label>
+    <input type="text" id="zip" name="zip" value="<%= volunteer.zip %>" required>
+
+    <label for="sewing_level">Sewing Level</label>
+    <input type="number" id="sewing_level" name="sewing_level" value="<%= volunteer.sewing_level %>" required>
+
+    <button type="submit">Save Changes</button>
+  </form>
+</body>
+</html>
