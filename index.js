@@ -116,18 +116,14 @@ app.post("/application", (req, res) => {
 // COMPLETED EVENTS PAGE
 // Route to display completed events page
 app.get('/completed_events', (req, res) => {
-  knex('completed_events')
-    .join('requested_event', 'completed_event.event_number', '=', 'requested_event.event_number')
+  knex('requested_event')
+    .join('host', 'requested_event.host_id', '=', 'host.host_id')
     .select(
-      'completed_event.event_number',
-      'completed_event.event_start',
-      'completed_event.number_of_participants',
-      'completed_event.event_duration',
-      'completed_event.pockets_produced',
-      'completed_event.enelopes_produced',
-      'completed_event.collars_produced',
-      'completed_event.vests_produced',
-      'completed_event.completed_products'
+      'requested_event.event_number',
+      'host.first_name',
+      'host.last_name',
+      'requested_event.event_description',
+      'requested_event.oragnization'
     )
     .then(completed_events => {
       // Render completed_events.ejs and pass the data
