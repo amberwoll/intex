@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- <form action="/addPoke" method="POST"> -->
+        <form>
+            <!-- Event Summary -->
+
+            <!-- Event Details -->
+            <label for="event_start">Event Start Time: </label>
+            <input
+                type="datetime"
+                id="event_start"
+                name="event_start"
+                required
+            >
+    
+            <label for="number_of_participants">Total Number of Participants: </label>
+            <input
+                type="number"
+                step="1"
+                id="number_of_participants"
+                name="number_of_participants"
+                required
+            >
+            <!-- Production Details -->
+            <label for="pockets_produced">Pockets Produced: </label>
+            <input
+                type="number"
+                step="1"
+                id="pockets_produced"
+                name="pockets_produced"
+                required  
+            >
+
+            <label for="envelopes_produced">Envelopes Produced: </label>
+            <input
+                type="number"
+                step="1"
+                id="envelopes_produced"
+                name="envelopes_produced"
+                required  
+            >
+
+            <label for="collars_produced">Collars Produced: </label>
+            <input
+                type="number"
+                step="1"
+                id="collars_produced"
+                name="collars_produced"
+                required  
+            >
+
+            <label for="vests_produced">Vests Produced: </label>
+            <input
+                type="number"
+                step="1"
+                id="vests_produced"
+                name="vests_produced"
+                required  
+            >
+
+            <label for="completed_products">Completed Products: </label>
+            <input
+                type="number"
+                step="1"
+                id="completed_products"
+                name="completed_products"
+                required  
+            >
+
+            <!-- Submit Button -->
+            <button type="submit">Submit Application</button>
+        </form>
+</body>
+</html>

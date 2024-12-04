@@ -10,5 +10,194 @@
 </head>
 <body>
     <h1>this will be the HOST form</h1>
+
+
+
+        
+    <!-- <form action="/addPoke" method="POST"> -->
+        <form>
+            <!-- Main/Host Contact Info -->
+            <label for="first_name">First Name: </label>
+            <input
+                type="text"
+                id="first_name"
+                name="first_name"
+                required
+                style="text-transform: uppercase;"
+                oninput="this.value = this.value.toUpperCase()"
+            >
+    
+            <label for="last_name">Last Name: </label>
+            <input
+                type="text"
+                id="last_name"
+                name="last_name"
+                required
+                style="text-transform: uppercase;"
+                oninput="this.value = this.value.toUpperCase()"
+            >
+    
+            <label for="phone">Phone Number: </label>
+            <input
+                type="text"
+                id="phone"
+                name="phone"
+                required  
+            >
+
+            <label for="host_email">Email: </label>
+            <input
+                type="text"
+                id="host_email"
+                name="host_email"
+                required
+            >
+
+            <!-- Event Details -->
+            <label for="organization"> Organization: </label>
+            <input
+                type="text"
+                id="organization"
+                name="organization"
+                required
+                style="text-transform: uppercase;"
+                oninput="this.value = this.value.toUpperCase()"
+            >
+
+            <label for="description">Description: </label>
+            <input
+                type="text"
+                id="description"
+                name="description"
+                required
+                
+            >
+            <!-- Event Location -->
+            <label for="street">Street: </label>
+            <input
+                type="text"
+                id="street"
+                name="street"
+                required
+                style="text-transform: uppercase;"
+                oninput="this.value = this.value.toUpperCase()"
+            >
+
+            <label for="city">City: </label>
+            <input
+                type="text"
+                id="city"
+                name="city"
+                required
+                style="text-transform: uppercase;"
+                oninput="this.value = this.value.toUpperCase()"
+            >
+
+            <label for="state">State: </label>
+            <input
+                type="text"
+                id="state"
+                name="state"
+                required
+                style="text-transform: uppercase;"
+                oninput="this.value = this.value.toUpperCase()"
+            >
+
+            <label for="zip">Zip: </label>
+            <input
+                type="text"
+                id="zip"
+                name="zip"
+                required
+            >
+
+            <!-- Possible Event Dates -->
+            <label for="possible_date_1">Possible Date 1: </label>
+            <input
+                type="datetime"
+                id="possible_date_1"
+                name="possible_date_1"
+                required
+            >
+
+            <label for="possible_date_2">Possible Date 2: </label>
+            <input
+                type="datetime"
+                id="possible_date_2"
+                name="possible_date_2"
+                required
+            >
+
+            <!-- Event Length -->
+            <label for="event_length">Event Length (Hours): </label>
+            <input
+                type="number" 
+                step="0.5"
+                id="event_length"
+                name="event_length"
+                required
+            >
+            
+            <!-- Activity Type -->
+            <label>Select Type of Activity</label>
+            <label>
+                <input type="radio" name="sewing_abbreviation" value="S" checked> Sewing
+            </label>
+            <label>
+                <input type="radio" name="sewing_abbreviation" value="N"> Non-Sewing
+            </label>
+            <label>
+                <input type="radio" name="sewing_abbreviation" value="B"> Both
+            </label>
+
+            <!-- Types of Participants -->
+            <label for="number_of_sewers">Number of Sewers: </label>
+            <input
+                type="number" 
+                step="1"
+                id="number_of_sewers"
+                name="number_of_sewers"
+                required
+            >
+            <label for="number_of_nonsewers">Number of Non-Sewers: </label>
+            <input
+                type="number" 
+                step="1"
+                id="number_of_nonsewers"
+                name="number_of_nonsewers"
+                required
+            >
+            <label for="number_of_children">Number of Children (Less than 10): </label>
+            <input
+                type="number" 
+                step="1" 
+                id="number_of_children"
+                name="number_of_children"
+                required
+            >
+
+            <!-- Sewing Machines -->
+            <label for="machine">Number of People Bringing Machines: </label>
+            <input
+                type="number" 
+                step="1" 
+                id="machine"
+                name="machine"
+                required
+            >
+
+            <!-- Jen's Story -->
+            <label for="jen_story">
+                <input type="checkbox" id="jen_story" name="jen_story" value="false">
+                Would you like to hear Jen's Story?
+            </label>
+
+            <!-- Submit Button -->
+            <button type="submit">Submit Application</button>
+        </form>
+
+
+
+
 </body>
 </html>
