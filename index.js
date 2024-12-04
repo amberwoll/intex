@@ -120,11 +120,12 @@ app.get('/completed_events', (req, res) => {
     .join('host', 'requested_event.host_id', '=', 'host.host_id')
     .select(
       'requested_event.event_number',
-      'host.first_name',
-      'host.last_name',
+      knex.raw("CONCAT(host.first_name, ' ', host.last_name) AS name"),
       'requested_event.event_description',
-      'requested_event.oragnization'
+      'requested_event.organization'
     )
+    // Only events that are marked as completed
+    .where('requested_event.status_id', '=', 1) 
     .then(completed_events => {
       // Render completed_events.ejs and pass the data
       res.render('completed_events', { completed_events });
