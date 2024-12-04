@@ -10,5 +10,175 @@
 </head>
 <body>
     <h1>this will be the HOST form</h1>
+
+
+
+        
+    <!-- <form action="/addPoke" method="POST"> -->
+        <form>
+            <!-- main/host contact info -->
+
+            <!-- from host table -->
+            <label for="first_name">First Name: </label>
+            <input
+                type="text"
+                id="first_name"
+                name="first_name"
+                required
+                style="text-transform: uppercase;"
+                oninput="this.value = this.value.toUpperCase()"
+            >
+    
+            <label for="last_name">Last Name: </label>
+            <input
+                type="text"
+                id="last_name"
+                name="last_name"
+                required
+                style="text-transform: uppercase;"
+                oninput="this.value = this.value.toUpperCase()"
+            >
+    
+            <label for="phone">Phone Number: </label>
+            <input
+                type="text"
+                id="phone"
+                name="phone"
+                required
+                
+            >
+            <label for="host_email">Email: </label>
+            <input
+                type="text"
+                id="host_email"
+                name="host_email"
+                required
+            >
+
+            <!-- requested event table -->
+            <label for="organization"> Organization: </label>
+            <input
+                type="text"
+                id="organization"
+                name="organization"
+                required
+            >
+
+            <label for="description">Description: </label>
+            <input
+                type="text"
+                id="description"
+                name="description"
+                required
+            >
+            <!-- location -->
+            <label for="street">Street: </label>
+            <input
+                type="text"
+                id="street"
+                name="street"
+                required
+                style="text-transform: uppercase;"
+                oninput="this.value = this.value.toUpperCase()"
+            >
+
+            <label for="city">City: </label>
+            <input
+                type="text"
+                id="city"
+                name="city"
+                required
+            >
+
+            <label for="state">State: </label>
+            <input
+                type="text"
+                id="state"
+                name="state"
+                required
+            
+            >
+
+            <label for="zip">Zip: </label>
+            <input
+                type="text"
+                id="zip"
+                name="zip"
+                required
+            >
+
+
+            <!--* DATES GO HERE!!!!! -->
+            <!-- Sewing Skill level -->
+            <label>Select Your Sewing Skill Level</label>
+            <label>
+                <input type="radio" name="sewing_level" value=1 checked> Beginner
+            </label>
+            <label>
+                <input type="radio" name="sewing_level" value=2> Intermediate
+            </label>
+            <label>
+                <input type="radio" name="sewing_level" value=3> Advanced
+            </label>
+    
+    
+            <!-- how did you find us -->
+            <label for="reference_id">How Did You Find Us?</label>
+            <select id="reference_id" name="reference_id" required>
+                <!--* this is variable -->
+                <% reference.forEach(type => { %>
+                    <option value="<%= type.reference_id %>"><%= type.reference_description %></option>
+                <% }) %>
+            </select>
+    
+            <!-- monthly hours -->
+            <label for="number_of_hours">How many Hours, on average, would you like to volunteer, monthly? </label>
+            <input
+                type="float"
+                id="number_of_hours"
+                name="number_of_hours"
+                required
+                
+            >
+    
+    
+            <!-- Email List (Checkbox) -->
+            <label for="email_list">
+                <input type="checkbox" id="email_list" name="email_list" value="true">
+                Would you like to receive monthly email updates?
+            </label>
+    
+    
+            <!-- Activity Preference -->
+            <label>What activity are you most interested in?</label>
+            <label>
+                <input type="radio" name="sewing_abbreviation" value='S' checked> Sewing
+            </label>
+            <label>
+                <input type="radio" name="sewing_abbreviation" value='N' > Non-Sewing
+            </label>
+            <label>
+                <input type="radio" name="sewing_abbreviation" value='B'> Both
+            </label>
+    
+    
+            <!-- Activity Preference -->
+            <label>Once trained, would you be comfortable leading a service event?</label>
+            <label>
+                <input type="radio" name="sewing_abbreviation" value='true' checked> Yes
+            </label>
+            <label>
+                <input type="radio" name="sewing_abbreviation" value='false' > No
+            </label>
+    
+    
+    
+            <!-- Submit Button -->
+            <button type="submit">Submit Application</button>
+        </form>
+
+
+
+
 </body>
 </html>
