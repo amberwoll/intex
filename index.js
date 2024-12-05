@@ -350,12 +350,19 @@ app.get("/editVolunteer/:id", (req, res) => {
         return res.status(404).send("Volunteer not found"); // Check if the volunteer exists before proceeding
       }
       
-      // Fetch the reference data
+      // Fetch the reference data and activity data
       knex('reference')
         .select('reference_id', 'reference_description')
         .then(reference => {
-          // Render the application form with both volunteer and reference data
-          res.render("edit_volunteer", { volunteer, reference });
+          knex('sewing_activity')  // Assuming you want data from 'activity' table
+            .then(sewing => {
+              // Render the application form with volunteer, reference, and activity data
+              res.render("edit_volunteer", { volunteer, reference, sewing });
+            })
+            .catch(error => {
+              console.error('Error fetching sewing data:', error);
+              res.status(500).send('Internal Server Error: Sewing.get');
+            });
         })
         .catch(error => {
           console.error('Error fetching reference types:', error);
@@ -367,6 +374,7 @@ app.get("/editVolunteer/:id", (req, res) => {
       res.status(500).send("Internal Server Error 2");
     });
 });
+
 
 
 // Route to edit volunteer

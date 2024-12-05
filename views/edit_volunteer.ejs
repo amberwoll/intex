@@ -1,4 +1,3 @@
-<!-- Edit Volunteer Form -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -36,6 +35,10 @@
         button:hover {
             background-color: #45A049;
         }
+        .radio-group, .checkbox-group {
+            display: flex;
+            gap: 20px;
+        }
     </style>
 </head>
 <body>
@@ -49,7 +52,17 @@
         <input type="text" id="last_name" name="last_name" value="<%= volunteer.last_name %>" required>
 
         <label for="sewing_level">Sewing Level</label>
-        <input type="number" id="sewing_level" name="sewing_level" value="<%= volunteer.sewing_level %>" required>
+        <div class="radio-group">
+            <label>
+                <input type="radio" id="sewing_level_1" name="sewing_level" value="1" <%= volunteer.sewing_level == 1 ? 'checked' : '' %>> Beginner
+            </label>
+            <label>
+                <input type="radio" id="sewing_level_2" name="sewing_level" value="2" <%= volunteer.sewing_level == 2 ? 'checked' : '' %>> Intermediate
+            </label>
+            <label>
+                <input type="radio" id="sewing_level_3" name="sewing_level" value="3" <%= volunteer.sewing_level == 3 ? 'checked' : '' %>> Expert
+            </label>
+        </div>
 
         <label for="phone">Phone</label>
         <input type="text" id="phone" name="phone" value="<%= volunteer.phone %>" required>
@@ -65,10 +78,11 @@
         <input type="number" id="number_of_hours" name="number_of_hours" value="<%= volunteer.number_of_hours %>" required>
 
         <label for="email_list">Email List</label>
-        <select id="email_list" name="email_list" required>
-            <option value="true" <%= volunteer.email_list ? "selected" : "" %>>Yes</option>
-            <option value="false" <%= !volunteer.email_list ? "selected" : "" %>>No</option>
-        </select>
+        <div class="checkbox-group">
+            <label>
+                <input type="checkbox" id="email_list" name="email_list" value="true" <%= volunteer.email_list ? "checked" : "" %>> Yes
+            </label>
+        </div>
 
         <label for="volunteer_email">Volunteer Email (Cannot be Edited)</label>
         <input type="email" id="volunteer_email" name="volunteer_email" value="<%= volunteer.volunteer_email %>" required readonly>
@@ -80,13 +94,24 @@
         <input type="text" id="zip" name="zip" value="<%= volunteer.zip %>" required>
 
         <label for="preference">Preference</label>
-        <input type="text" id="preference" name="preference" value="<%= volunteer.preference %>" required>
+        <div class="radio-group">
+            <label>
+                <input type="radio" id="preference_s" name="preference" value="S" <%= volunteer.preference == 'S' ? 'checked' : '' %>> Sewing
+            </label>
+            <label>
+                <input type="radio" id="preference_n" name="preference" value="N" <%= volunteer.preference == 'N' ? 'checked' : '' %>> Non-Sewing
+            </label>
+            <label>
+                <input type="radio" id="preference_b" name="preference" value="B" <%= volunteer.preference == 'B' ? 'checked' : '' %>> Both
+            </label>
+        </div>
 
         <label for="leadership">Leadership</label>
-        <select id="leadership" name="leadership" required>
-            <option value="true" <%= volunteer.leadership === true ? "selected" : "" %>>Yes</option>
-            <option value="false" <%= volunteer.leadership === false ? "selected" : "" %>>No</option>
-        </select><br>
+        <div class="checkbox-group">
+            <label>
+                <input type="checkbox" id="leadership" name="leadership" value="true" <%= volunteer.leadership === true ? "checked" : "" %>> Yes
+            </label>
+        </div>
 
         <button type="submit">Update Volunteer</button>
     </form>
