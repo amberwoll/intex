@@ -311,23 +311,32 @@ app.get("/volunteers", (req, res) => {
     });
 });
 
-// Route to delete volunteer
-// BROKEN!!!!
-// app.post("/deleteVolunteer/:id", (req, res) => {
-//   const { id } = req.params; // Extract the ID from the route parameters
-//   console.log("Attempting to delete volunteer with ID:", id); // Debug log
+// Route to delete volunteer and their associated info in the passwords table
+app.post("/deleteVolunteer/:email", (req, res) => {
+  const { volunteer_id, volunteer_email } = req.params;
+   // Extract the email from the route parameters
+  console.log("Attempting to delete volunteer with email:", volunteer_email); // Debug log
 
-//   knex("volunteer")
-//     .where("volunteer_id", id) // Ensure "volunteer_id" matches your DB schema
-//     .del()
-//     .then(() => {
-//       res.redirect("/volunteers");
-//     })
-//     .catch((error) => {
-//       console.error("Error deleting volunteer:", error.message);
-//       res.status(500).send("Internal Server Error");
-//     });
-// });
+  // Start a transaction to delete from both tables
+  knex.transaction((trx) => {
+    return trx("login")
+      .where("volunteer_email", volunteer_email) // Ensure the email matches in the passwords table
+      .del() // Delete password entry associated with the volunteer
+      .then(() => {
+        return trx("volunteer")
+          .where("volunteer_email", volunteer_email) // Ensure the email matches in the volunteer table
+          .del(); // Delete volunteer entry
+      });
+  })
+  .then(() => {
+    res.redirect("/volunteers"); // Redirect to volunteers page after deletion
+  })
+  .catch((error) => {
+    console.error("Error deleting volunteer:", error.message);
+    res.status(500).send("Internal Server Error");
+  });
+});
+
 
 // Route to display the edit page
 app.get("/editVolunteer/:id", (req, res) => {
