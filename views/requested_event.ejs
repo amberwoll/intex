@@ -92,7 +92,7 @@
               <td>
                 <form action="/updateEventStatus/<%= requested_event.event_number %>" method="POST">
                   <select name="status">
-                    <option value="Pending" <%= event.status_description && event.status_description.trim() === "Pending" ? "selected" : "" %>>Pending</option>
+                    <option value="Pending" <%= requested_event.status_description && requested_event.status_description.trim() === "Pending" ? "selected" : "" %>>Pending</option>
                     <option value="Approved" <%= requested_event.status_description === "Approved" ? "selected" : "" %>>Approved</option>
                     <option value="Complete" <%= requested_event.status_description === "Complete" ? "selected" : "" %>>Complete</option>
                     <option value="Rejected" <%= requested_event.status_description === "Rejected" ? "selected" : "" %>>Rejected</option>
