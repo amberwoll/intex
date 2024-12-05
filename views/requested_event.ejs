@@ -46,24 +46,24 @@
       <thead>
         <tr>
           <th>Event Number</th>
-          <th>Host ID</th>
+          <th>Host</th>
+          <th>Organization</th>
           <th>Event Description</th>
-          <th>Number of Sewers</th>
-          <th>Number of Non-Sewers</th>
-          <th>Number of Children</th>
-          <th>Sewing Abbreviation</th>
-          <th>Possible Date 1</th>
-          <th>Possible Date 2</th>
           <th>Street</th>
           <th>City</th>
           <th>State</th>
           <th>Zip</th>
+          <th>Possible Date 1</th>
+          <th>Possible Date 2</th>
           <th>Event Length</th>
-          <th>Organization</th>
-          <th>Jen Story</th>
-          <th>Status</th>
+          <th>Sewing Activity</th>
+          <th>Number of Sewers</th>
+          <th>Number of Non-Sewers</th>
+          <th>Number of Children</th>
           <th>Machine</th>
           <th>Size of Space</th>
+          <th>Jen Story</th>
+          <th>Status</th>
           <th>Actions</th>
         </tr>
       </thead>
@@ -92,17 +92,15 @@
               <td>
                 <form action="/updateEventStatus/<%= requested_event.event_number %>" method="POST">
                   <select name="status">
-                    <option value="Pending" <%= requested_event.status_description === "Pending" ? "selected" : "" %>>Pending</option>
+                    <option value="Pending" <%= event.status_description && event.status_description.trim() === "Pending" ? "selected" : "" %>>Pending</option>
                     <option value="Approved" <%= requested_event.status_description === "Approved" ? "selected" : "" %>>Approved</option>
                     <option value="Complete" <%= requested_event.status_description === "Complete" ? "selected" : "" %>>Complete</option>
                     <option value="Rejected" <%= requested_event.status_description === "Rejected" ? "selected" : "" %>>Rejected</option>
                   </select>
-                  
                 </form>
               </td>
               <td>
                 <button type="submit">Save</button>
-                
               </td>
             </tr>
           <% }) %>
