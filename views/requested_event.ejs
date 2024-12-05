@@ -91,11 +91,12 @@
               <td><%= requested_event.jen_story %></td>
               <td>
                 <form action="/updateEventStatus/<%= requested_event.event_number %>" method="POST">
-                  <select name="status">
-                    <option value="Pending" <%= requested_event.status_description && requested_event.status_description.trim() === "Pending" ? "selected" : "" %>>Pending</option>
-                    <option value="Approved" <%= requested_event.status_description === "Approved" ? "selected" : "" %>>Approved</option>
-                    <option value="Complete" <%= requested_event.status_description === "Complete" ? "selected" : "" %>>Complete</option>
-                    <option value="Rejected" <%= requested_event.status_description === "Rejected" ? "selected" : "" %>>Rejected</option>
+                  <select status_id="status_id" name="status_id">
+                    <% event_status.forEach(description => { %>
+                      <option value="<%= description.event_status %>" <%= requested_event.status_description === description.event_status ? 'selected' : '' %>>
+                        <%= description.status_description %>
+                      </option>
+                    <% }) %>
                   </select>
                 </form>
               </td>

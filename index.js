@@ -94,7 +94,6 @@ app.post("/application", (req, res) => {
 // REQUESTED EVENTS PAGE
 // Route to display requested events page
 app.get("/requested_event", (req, res) => {
-  console.log('can you hear me?')
   knex("requested_event")
     .join('host', 'requested_event.host_id', '=', 'host.host_id')
     .join('sewing_activity', 'requested_event.sewing_abbreviation', '=', 'sewing_activity.sewing_abbreviation')
@@ -117,12 +116,18 @@ app.get("/requested_event", (req, res) => {
       'requested_event.number_of_children',
       'requested_event.machine',      
       'requested_event.jen_story',
-      'requested_event.jen_story',
+      'requested_event.size_of_space',
       'status.status_description' 
     )
     .then((requested_event) => {
-      console.log('please show up', requested_event);
-      res.render("requested_event", { requested_event });
+      if (!requested_event){
+        return res.status(404).send('Event not found');
+      }
+      knex('status')
+        .select('status_id', 'status_description')
+        .then(event_status => {
+          res.render("requested_event", { requested_event, event_status });
+        });
     })
     .catch((error) => {
       console.error("Error fetching requested events:", error.message);
