@@ -347,15 +347,27 @@ app.get("/editVolunteer/:id", (req, res) => {
     .first() // Get the first record
     .then((volunteer) => {
       if (!volunteer) {
-        return res.status(404).send("Volunteer not found");
+        return res.status(404).send("Volunteer not found"); // Check if the volunteer exists before proceeding
       }
-      res.render("edit_volunteer", { volunteer }); // Pass volunteer data to the EJS template
+      
+      // Fetch the reference data
+      knex('reference')
+        .select('reference_id', 'reference_description')
+        .then(reference => {
+          // Render the application form with both volunteer and reference data
+          res.render("edit_volunteer", { volunteer, reference });
+        })
+        .catch(error => {
+          console.error('Error fetching reference types:', error);
+          res.status(500).send('Internal Server Error: Reference.get');
+        });
     })
     .catch((error) => {
       console.error("Error fetching volunteer:", error.message);
       res.status(500).send("Internal Server Error 2");
     });
 });
+
 
 // Route to edit volunteer
 // INCOMPLETE - NEED FIX
