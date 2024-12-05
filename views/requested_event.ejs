@@ -93,12 +93,14 @@
                 <form action="/updateEventStatus/<%= requested_event.event_number %>" method="POST">
                   <select id="status_id" name="status_id">
                     <% event_status.forEach(description => { %>
-                      <option value="<%= description.status_id %>" <%= requested_event.status_id === description.status_id ? 'selected' : '' %>>
+                      <option 
+                        value="<%= description.status_id %>" 
+                        <%= parseInt(requested_event.status_id, 10) === parseInt(description.status_id, 10) ? 'selected' : '' %>>
                         <%= description.status_description %>
                       </option>
                     <% }) %>
                   </select>
-                </form>
+                </form>                
               </td>
               <td>
                 <button type="submit">Save</button>
