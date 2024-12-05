@@ -120,15 +120,15 @@ app.get("/requested_event", (req, res) => {
       'status.status_description' 
     )
     .then((requested_event) => {
-      if (!requested_event){
+      if (!requested_event) {
         return res.status(404).send('Event not found');
       }
       knex('status')
         .select('status_id', 'status_description')
         .then(event_status => {
-          res.render("requested_event", { requested_event, event_status });
+          res.render("requested_event", { requested_event: [requested_event], event_status });
         });
-    })
+    })    
     .catch((error) => {
       console.error("Error fetching requested events:", error.message);
       res.status(500).send("Internal Server Error: requested_event .get");
