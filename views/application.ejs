@@ -36,6 +36,10 @@
         button:hover {
             background-color: #45A049;
         }
+        .radio-group, .checkbox-group {
+            display: flex;
+            gap: 20px;
+        }
     </style>
 </head>
 <body>
@@ -100,15 +104,18 @@
 
         <!-- Sewing Skill level -->
         <label>Select Your Sewing Skill Level:</label>
-        <label>
-            <input type="radio" name="sewing_level" value="1" checked> Beginner
-        </label>
-        <label>
-            <input type="radio" name="sewing_level" value="2"> Intermediate
-        </label>
-        <label>
-            <input type="radio" name="sewing_level" value="3"> Advanced
-        </label><br>
+        <div class="radio-group">
+            <label>
+                <input type="radio" name="sewing_level" value="1" checked> Beginner
+            </label>
+            <label>
+                <input type="radio" name="sewing_level" value="2"> Intermediate
+            </label>
+            <label>
+                <input type="radio" name="sewing_level" value="3"> Advanced
+            </label>
+    
+        </div>
 
         <!-- How Did You Find Us -->
         <label for="reference_id">How Did You Find Us?</label>
@@ -136,23 +143,23 @@
 
         <!-- Activity Preference -->
         <label>What Activity Type Are You Most Interested in?</label>
-        <label>
-            <input type="radio" name="sewing_abbreviation" value='S' checked> Sewing
-        </label>
-        <label>
-            <input type="radio" name="sewing_abbreviation" value='N'> Non-Sewing
-        </label>
-        <label>
-            <input type="radio" name="sewing_abbreviation" value='B'> Both
-        </label><br>
+        <div class="radio-group">
+            <label>
+                <input type="radio" name="sewing_abbreviation" value='S' checked> Sewing
+            </label>
+            <label>
+                <input type="radio" name="sewing_abbreviation" value='N'> Non-Sewing
+            </label>
+            <label>
+                <input type="radio" name="sewing_abbreviation" value='B'> Both
+            </label>
+        </div>
 
         <!-- Leadership -->
         <label>Once Trained, Would You be Comfortable Leading a Service Event?</label>
-        <label>
-            <input type="radio" name="leadership" value='true' checked> Yes
-        </label>
-        <label>
-            <input type="radio" name="leadership" value='false'> No
+        <label for="leadership">
+            <input type="checkbox" id="leadership" name="leadership" value="true">
+            Would You Like to Receive Monthly Email Updates?
         </label><br>
 
         <!-- Submit Button -->
