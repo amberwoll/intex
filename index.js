@@ -132,10 +132,84 @@ app.get("/requested_event", (req, res) => {
 // Route to edit requests
 
 // Route to save edits
-
+// route to host page
 app.get('/host', (req, res) => {
   res.render('host')
 })
+
+//route to save host form
+
+
+app.post('/host', (req, res) => {
+  // Extract form values from req.body
+  const first_name = req.body.first_name || ''; // Default to empty string if not provided
+  const last_name = req.body.last_name || ''; // Default to empty string if not provided
+  const phone = req.body.phone || '';
+  const host_email = req.body.host_email; 
+  const organization = req.body.organization || ''; 
+  const description = req.body.description || ''; 
+  const street = req.body.street || ''; 
+  const city = req.body.city || ''; 
+  const state = req.body.state || ''; 
+  const zip = req.body.zip || ''; 
+  const possible_date_1 = req.body.possible_date_1 || ''; 
+  const possible_date_2 = req.body.possible_date_2 || ''; 
+  const event_length = parseFloat(req.body.event_length); 
+  const sewing_abbreviation = req.body.sewing_abbreviation || 'N';
+  const number_of_sewers = parseInt(req.body.number_of_sewers, 10); // Convert to integer
+  const number_of_nonsewers = parseInt(req.body.number_of_nonsewers, 10); // Convert to integer
+  const number_of_children = parseInt(req.body.number_of_children, 10); // Convert to integer
+  const machine = parseInt(req.body.machine, 10); // Convert to integer
+  const jen_story = req.body.jen_story === 'true'; // Checkbox returns true or undefined
+  
+  knex.transaction(async (trx) => {
+    try {
+      // Insert data into 'host' table and retrieve the generated 'host_id'
+      const [host_id] = await trx('host')
+        .insert({
+          first_name: first_name.toUpperCase(),
+          last_name: last_name.toUpperCase(),
+          phone,
+          host_email
+        })
+        .returning('host_id'); 
+
+      // Insert into 'requested_events' table, using the retrieved 'host_id'
+      await trx('requested_events').insert({
+        host_id: host_id,
+        organization,
+        description,
+        street,
+        city,
+        state,
+        zip,
+        possible_date_1,
+        event_length,
+        sewing_abbreviation,
+        number_of_sewers,
+        number_of_nonsewers,
+        number_of_children,
+        machine,
+        jen_story
+      });
+
+      // Commit the transaction
+      await trx.commit();
+
+      // Redirect or send a success response
+      res.redirect('/');
+    } catch (error) {
+      // Roll back the transaction in case of an error
+      await trx.rollback();
+
+      // Log and handle the error
+      console.error('Error during transaction:', error);
+      res.status(500).send('Internal Server Error');
+    }
+  });
+});
+
+
 // COMPLETED EVENTS PAGE
 // Route to display completed events page
 app.get('/completed_events', (req, res) => {
