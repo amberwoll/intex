@@ -58,7 +58,7 @@
                 <td><%= row.volunteer_email %></td>
                 <td><%= row.password %></td>
                 <td>
-                  <form action="/updateEventStatus/<%= requested_event.event_number %>" method="POST">
+                  <form action="/login/<%= login.volunteer_email %>" method="POST">
                     <select id="role_id" name="role_id">
                       <% role.forEach(row => { %>
                         <option 
