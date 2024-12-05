@@ -45,7 +45,6 @@
     <table>
       <thead>
         <tr>
-          <th>Event Number</th>
           <th>Host</th>
           <th>Organization</th>
           <th>Event Description</th>
@@ -64,14 +63,13 @@
           <th>Size of Space</th>
           <th>Jen Story</th>
           <th>Status</th>
-          <th>Actions</th>
         </tr>
       </thead>
       <tbody>
         <% if (requested_events.length > 0) { %>
           <% requested_events.forEach(requested_event => { %>
             <tr>
-              <td><%= requested_event.event_number %></td>
+              <input type="hidden" value="requested_event.event_number">
               <td><%= requested_event.host %></td>
               <td><%= requested_event.organization %></td>
               <td><%= requested_event.event_description %></td>

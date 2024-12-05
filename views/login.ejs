@@ -5,8 +5,80 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        table {
+          width: 100%;
+          margin: 20px auto;
+          border-collapse: collapse;
+          font-size: 12px;
+        }
+        th, td {
+          border: 1px solid #ddd;
+          padding: 8px;
+          text-align: center;
+        }
+        th {
+          background-color: #f2f2f2;
+          font-weight: bold;
+        }
+        button {
+          padding: 4px 8px;
+          margin: 2px;
+          font-size: 12px;
+          cursor: pointer;
+        }
+        h1 {
+          text-align: center;
+          margin: 20px 0;
+        }
+        .form-container {
+          display: flex;
+          justify-content: center;
+          margin: 20px 0;
+        }
+      </style>
 </head>
 <body>
-    <h1>this will be the LOGIN page</h1>
+    <h1>LOGIN</h1>
+    <form action="/" method="GET">
+        <button type="submit">Home</button>
+      </form>
+      <table>
+        <thead>
+          <tr>
+            <th>Email</th>
+            <th>Password</th>
+            <th>Role</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% if (login.length > 0) { %>
+            <% login.forEach(row => { %>
+              <tr>
+                <td><%= row.volunteer_email %></td>
+                <td><%= row.password %></td>
+                <td>
+                  <form action="/updateEventStatus/<%= requested_event.event_number %>" method="POST">
+                    <select id="role_id" name="role_id">
+                      <% role.forEach(row => { %>
+                        <option 
+                          value="<%= row.role_id %>" 
+                          <%= parseInt(login.role_id, 10) === parseInt(row.role_id, 10) ? 'selected' : '' %>>
+                          <%= row.poition_title %>
+                        </option>
+                      <% }) %>
+                    </select>
+                    <button type="submit">Save</button>
+                  </form>                
+                </td>
+              </tr>
+            <% }) %>
+          <% } else { %>
+            <tr>
+              <td colspan="7">No data available</td>
+            </tr>
+          <% } %>
+        </tbody>
+      </table>
 </body>
 </html>

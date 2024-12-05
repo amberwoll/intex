@@ -471,7 +471,7 @@ app.get('/login', (req, res) => {
   knex('login')
   .select("")
   .then((login) => {
-    knex('role')
+    knex('v_role')
     .select("")
     .then((role) => {
       res.render("login", { role, login })
