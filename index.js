@@ -149,7 +149,6 @@ app.get('/host', (req, res) => {
 
 app.post('/host', (req, res) => {
   // Extract form values from req.body
-  console.log("BODY: ", req.body);
   const first_name = req.body.first_name || ''; // Default to empty string if not provided
   const last_name = req.body.last_name || ''; // Default to empty string if not provided
   const phone = req.body.phone || '';
@@ -402,7 +401,7 @@ app.post("/editVolunteer/:id", (req, res) => {
     sewing_level,
     preference
    } = req.body;
-   const number_of_hours = parseFloat(number_of_hours);
+   const number_of_hours = parseFloat(req.body.number_of_hours);
    const leadership = req.body.leadership === 'true';
    const email_list = req.body.email_list === 'true';
 
