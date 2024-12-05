@@ -68,8 +68,8 @@
         </tr>
       </thead>
       <tbody>
-        <% if (requested_event.length > 0) { %>
-          <% requested_event.forEach(requested_event => { %>
+        <% if (requested_events.length > 0) { %>
+          <% requested_events.forEach(requested_event => { %>
             <tr>
               <td><%= requested_event.event_number %></td>
               <td><%= requested_event.host %></td>
