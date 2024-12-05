@@ -60,7 +60,7 @@
                 <td>
                   <form action="/login/<%= login.volunteer_email %>" method="POST">
                     <select id="role_id" name="role_id">
-                      <% role.forEach(row => { %>
+                      <% v_role.forEach(row => { %>
                         <option 
                           value="<%= row.role_id %>" 
                           <%= parseInt(login.role_id, 10) === parseInt(row.role_id, 10) ? 'selected' : '' %>>
