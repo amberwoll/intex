@@ -392,7 +392,20 @@ app.get("/editVolunteer/:id", (req, res) => {
 // INCOMPLETE - NEED FIX
 app.post("/editVolunteer/:id", (req, res) => {
   const { id } = req.params;
-  const { first_name, last_name, phone, city, zip, sewing_level } = req.body;
+  const { 
+    first_name,
+    last_name,
+    phone, 
+    city, 
+    zip, 
+    reference_id,
+    sewing_level,
+    preference
+   } = req.body;
+   const number_of_hours = parseFloat(number_of_hours);
+   const leadership = req.body.leadership === 'true';
+   const email_list = req.body.email_list === 'true';
+
 
   knex("volunteer")
     .where("volunteer_id", id) // Find the record by ID
@@ -402,7 +415,12 @@ app.post("/editVolunteer/:id", (req, res) => {
       phone,
       city: city.toUpperCase(),
       zip,
-      sewing_level: parseInt(sewing_level, 10),
+      reference_id,
+      sewing_level,
+      preference,
+      number_of_hours,
+      leadership,
+      email_list
     })
     .then(() => {
       console.log(`Volunteer ${id} updated successfully`);

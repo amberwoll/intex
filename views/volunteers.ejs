@@ -71,12 +71,12 @@
               <td><%= volunteer.phone %></td>
               <td><%= volunteer.reference_description %></td>
               <td><%= volunteer.number_of_hours %></td>
-              <td><%= volunteer.email_list %></td>
+              <td><%= volunteer.email_list ? "Yes" : "No" %></td>
               <td><%= volunteer.volunteer_email %></td>
               <td><%= volunteer.city %></td>
               <td><%= volunteer.zip %></td>
               <td><%= volunteer.sewing_preference %></td>
-              <td><%= volunteer.leadership %></td>
+              <td><%= volunteer.leadership ? "Yes" : "No" %></td>
               <td>
                 <!-- Edit Button -->
                 <form
