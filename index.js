@@ -312,7 +312,7 @@ app.get("/volunteers", (req, res) => {
 });
 
 // Route to delete volunteer and their associated info in the passwords table
-app.post("/deleteVolunteer/:email", (req, res) => {
+app.post("/deleteVolunteer/:volunteer_email", (req, res) => {
   const { volunteer_id, volunteer_email } = req.params;
    // Extract the email from the route parameters
   console.log("Attempting to delete volunteer with email:", volunteer_email); // Debug log
