@@ -56,7 +56,7 @@
             <% login.forEach(row => { %>
               <tr>
                 <td><%= row.volunteer_email %></td>
-                <td><%= row.password %></td>
+                <td><%= row.user_password %></td>
                 <td>
                   <form action="/login/<%= login.volunteer_email %>" method="POST">
                     <select id="role_id" name="role_id">
