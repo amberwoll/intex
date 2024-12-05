@@ -277,8 +277,8 @@ app.post('/save_completed_events/:event_number', (req, res) => {
   } = req.body;
 
   knex('completed_event')
-    .insert({
-      event_number,
+    .where('event_number', event_number)
+    .update({
       event_start,
       number_of_participants,
       event_duration,
