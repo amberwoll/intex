@@ -465,6 +465,25 @@ app.post('/updateEventStatus/:event_number', async (req, res) => {
   }
 });
 
+//login page
+// get function to show existing users and by able to add and delete and edit roles
+app.get('/login', (req, res) => {
+  knex('login')
+  .select("")
+  .then((login) => {
+    knex('role')
+    .select("")
+    .then((role) => {
+      res.render("login", { role, login })
+    })
+  })
+  .catch((error) => {
+    console.error("Error fetching login:", error.message);
+    res.status(500).send("Internal Server Error 10");
+  });
+});
+
+
 
 // START SERVER
 app.listen(port, () => {

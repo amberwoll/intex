@@ -44,7 +44,6 @@
     <table>
       <thead>
         <tr>
-          <th>Volunteer ID</th>
           <th>First Name</th>
           <th>Last Name</th>
           <th>Sewing Level</th>
@@ -64,7 +63,7 @@
         <% if (volunteers.length > 0) { %>
           <% volunteers.forEach(volunteer => { %>
             <tr>
-              <td><%= volunteer.volunteer_id %></td>
+              <input type="hidden" value="volunteer.volunteer_id">
               <td><%= volunteer.first_name %></td>
               <td><%= volunteer.last_name %></td>
               <td><%= volunteer.sewing_description %></td>
