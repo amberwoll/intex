@@ -306,8 +306,8 @@ app.get("/volunteers", (req, res) => {
     .join("sewing_skill", "volunteer.sewing_level", "=", "sewing_skill.sewing_level")
     .select(
       "volunteer.*",
-      "reference.reference_description",
-      "sewing_activity.description as sewing_preference",
+      "reference.reference_description as reference_description",
+      "sewing_activity.sewing_description as sewing_preference",
       "sewing_skill.sewing_ability as sewing_description"
     )
     .then((volunteers) => {
@@ -315,7 +315,7 @@ app.get("/volunteers", (req, res) => {
     })
     .catch((error) => {
       console.error("Error fetching volunteers:", error);
-      res.status(500).send("Internal Server Error");
+      res.status(500).send("Internal Server Error 10");
     });
 });
 
