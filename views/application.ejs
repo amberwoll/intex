@@ -1,17 +1,49 @@
-<!-- New Volunteer Form-->
+<!-- New Volunteer Form -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Volunteer Application</title>
+    <style>
+        form {
+            width: 50%;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            background-color: #F9F9F9;
+            font-size: 14px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        input, select, button {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45A049;
+        }
+    </style>
 </head>
 <body>
-    <h1 style="text-align: center;">this will be the APPLICATION form</h1>
+    <h1 style="text-align: center;">Volunteer Application Form</h1>
 
     <form action="/application" method="POST">
         <!-- Contact Info -->
-        <label for="first_name">First Name: </label>
+        <label for="first_name">First Name:</label>
         <input
             type="text"
             id="first_name"
@@ -20,7 +52,8 @@
             style="text-transform: uppercase;"
             oninput="this.value = this.value.toUpperCase()"
         >
-        <label for="last_name">Last Name: </label>
+        
+        <label for="last_name">Last Name:</label>
         <input
             type="text"
             id="last_name"
@@ -29,22 +62,25 @@
             style="text-transform: uppercase;"
             oninput="this.value = this.value.toUpperCase()"
         >
-        <label for="phone">Phone Number: </label>
+
+        <label for="phone">Phone Number:</label>
         <input
             type="text"
             id="phone"
             name="phone"
-            required  
+            required
         >
-        <label for="volunteer_email">Email: </label>
+
+        <label for="volunteer_email">Email:</label>
         <input
-            type="text"
+            type="email"
             id="volunteer_email"
             name="volunteer_email"
             required
         ><br>
+
         <!-- Location -->
-        <label for="city">What City Are You Located In: </label>
+        <label for="city">What City Are You Located In:</label>
         <input
             type="text"
             id="city"
@@ -53,7 +89,8 @@
             style="text-transform: uppercase;"
             oninput="this.value = this.value.toUpperCase()"
         >
-        <label for="zip">What Is Your Zip Code: </label>
+
+        <label for="zip">What Is Your Zip Code:</label>
         <input
             type="text"
             id="zip"
@@ -62,28 +99,27 @@
         ><br>
 
         <!-- Sewing Skill level -->
-        <label>Select Your Sewing Skill Level</label>
+        <label>Select Your Sewing Skill Level:</label>
         <label>
-            <input type="radio" name="sewing_level" value=1 checked> Beginner
+            <input type="radio" name="sewing_level" value="1" checked> Beginner
         </label>
         <label>
-            <input type="radio" name="sewing_level" value=2> Intermediate
+            <input type="radio" name="sewing_level" value="2"> Intermediate
         </label>
         <label>
-            <input type="radio" name="sewing_level" value=3> Advanced
+            <input type="radio" name="sewing_level" value="3"> Advanced
         </label><br>
 
         <!-- How Did You Find Us -->
         <label for="reference_id">How Did You Find Us?</label>
         <select id="reference_id" name="reference_id" required>
-            <!--* this is variable -->
             <% reference.forEach(type => { %>
                 <option value="<%= type.reference_id %>"><%= type.reference_description %></option>
             <% }) %>
         </select><br>
 
         <!-- Monthly Hours -->
-        <label for="number_of_hours">How Many Hours, on Average, Would You Like to Volunteer, Monthly? </label>
+        <label for="number_of_hours">How Many Hours, on Average, Would You Like to Volunteer, Monthly?</label>
         <input
             type="number"
             step="0.5"
@@ -104,26 +140,23 @@
             <input type="radio" name="sewing_abbreviation" value='S' checked> Sewing
         </label>
         <label>
-            <input type="radio" name="sewing_abbreviation" value='N' > Non-Sewing
+            <input type="radio" name="sewing_abbreviation" value='N'> Non-Sewing
         </label>
         <label>
             <input type="radio" name="sewing_abbreviation" value='B'> Both
         </label><br>
 
-        <!-- Activity Preference -->
+        <!-- Leadership -->
         <label>Once Trained, Would You be Comfortable Leading a Service Event?</label>
         <label>
             <input type="radio" name="leadership" value='true' checked> Yes
         </label>
         <label>
-            <input type="radio" name="leadership" value='false' > No
+            <input type="radio" name="leadership" value='false'> No
         </label><br>
 
         <!-- Submit Button -->
         <button type="submit">Submit Application</button>
     </form>
-
-
-
 </body>
 </html>
