@@ -147,6 +147,7 @@ app.get('/host', (req, res) => {
 
 app.post('/host', (req, res) => {
   // Extract form values from req.body
+  console.log("BODY: ", req.body);
   const first_name = req.body.first_name || ''; // Default to empty string if not provided
   const last_name = req.body.last_name || ''; // Default to empty string if not provided
   const phone = req.body.phone || '';
@@ -179,6 +180,8 @@ app.post('/host', (req, res) => {
         })
         .returning('host_id'); 
 
+      console.log('host_id');
+
       // Insert into 'requested_events' table, using the retrieved 'host_id'
       await trx('requested_event').insert({
         host_id: host_id,
@@ -203,6 +206,7 @@ app.post('/host', (req, res) => {
 
       // Redirect or send a success response
       res.redirect('/');
+      console.log("successfully reached this point");
     } catch (error) {
       // Roll back the transaction in case of an error
       await trx.rollback();
