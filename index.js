@@ -133,7 +133,9 @@ app.get("/requested_event", (req, res) => {
 
 // Route to save edits
 
-
+app.get('/host', (req, res) => {
+  res.render('host')
+})
 // COMPLETED EVENTS PAGE
 // Route to display completed events page
 app.get('/completed_events', (req, res) => {
