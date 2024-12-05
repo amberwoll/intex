@@ -390,13 +390,13 @@ app.post('/updateEventStatus/:event_number', async (req, res) => {
         .update({ status_id });
 
       // Check if the event exists in the `completed_events` table
-      const completed_event = await trx('completed_events')
+      const completed_event = await trx('completed_event')
         .where({ event_number: event_number })
         .first();
 
       // If not found, insert a new row
       if (!completed_event) {
-        await trx('completed_events').insert({ event_number: event_number });
+        await trx('completed_event').insert({ event_number: event_number });
       }
     });
 
