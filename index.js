@@ -180,7 +180,7 @@ app.post('/host', (req, res) => {
         .returning('host_id'); 
 
       // Insert into 'requested_events' table, using the retrieved 'host_id'
-      await trx('requested_events').insert({
+      await trx('requested_event').insert({
         host_id: host_id,
         organization,
         description,
@@ -366,6 +366,40 @@ app.post("/editVolunteer/:id", (req, res) => {
       console.error("Error updating volunteer:", error.message);
       res.status(500).send("Internal Server Error 3");
     });
+});
+
+
+// post to update event status and add a row to completed events if one does not exist
+
+app.post('/updateEventStatus/:event_number', async (req, res) => {
+  const event_number = parseInt(req.params.event_number, 10); // Extract the event number from the URL
+  const { status_id } = req.body; // Extract the status ID from the form submission
+
+  try {
+    // Use a transaction for consistency
+    await knex.transaction(async (trx) => {
+      // Update the status in the `requested_events` table
+      await trx('requested_event')
+        .where({ event_number: event_number })
+        .update({ status_id });
+
+      // Check if the event exists in the `completed_events` table
+      const completed_event = await trx('completed_events')
+        .where({ event_number: event_number })
+        .first();
+
+      // If not found, insert a new row
+      if (!completed_event) {
+        await trx('completed_events').insert({ event_number: event_number });
+      }
+    });
+
+    // Redirect back to the requested events page or send a success response
+    res.redirect('/requested_event');
+  } catch (error) {
+    console.error('Error updating event status:', error);
+    res.status(500).send('Internal Server Error');
+  }
 });
 
 
