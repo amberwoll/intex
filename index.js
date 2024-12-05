@@ -301,15 +301,24 @@ app.post('/save_completed_events/:event_number', (req, res) => {
 // Route to display the volunteers page
 app.get("/volunteers", (req, res) => {
   knex("volunteer")
-    .select("*")
+    .join("reference", "volunteer.reference_id", "=", "reference.reference_id") // Join with the reference table
+    .join("sewing_activity", "volunteer.preference", "=", "sewing_activity.sewing_abbreviation") // Join with sewing levels
+    .join("sewing_skill", "volunteer.sewing_level", "=", "sewing_skill.sewing_level")
+    .select(
+      "volunteer.*",
+      "reference.reference_description",
+      "sewing_activity.description as sewing_preference",
+      "sewing_skill.sewing_ability as sewing_description"
+    )
     .then((volunteers) => {
       res.render("volunteers", { volunteers });
     })
     .catch((error) => {
-      console.error("Error fetching volunteers:", error.message);
-      res.status(500).send("Internal Server Error 1");
+      console.error("Error fetching volunteers:", error);
+      res.status(500).send("Internal Server Error");
     });
 });
+
 
 // Route to delete volunteer and their associated info in the passwords table
 app.post("/deleteVolunteer/:volunteer_email", (req, res) => {
@@ -336,6 +345,8 @@ app.post("/deleteVolunteer/:volunteer_email", (req, res) => {
     res.status(500).send("Internal Server Error");
   });
 });
+
+
 
 
 // Route to display the edit page
