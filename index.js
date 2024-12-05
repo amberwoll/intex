@@ -484,6 +484,12 @@ app.get('/login', (req, res) => {
 });
 
 
+app.get('/add_login', (req, res) => {
+  knex('v_role')
+  .then((role) => {
+    res.render('add_login', { role })
+  })
+});
 
 // START SERVER
 app.listen(port, () => {
