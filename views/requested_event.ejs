@@ -91,9 +91,9 @@
               <td><%= requested_event.jen_story %></td>
               <td>
                 <form action="/updateEventStatus/<%= requested_event.event_number %>" method="POST">
-                  <select status_id="status_id" name="status_id">
+                  <select id="status_id" name="status_id">
                     <% event_status.forEach(description => { %>
-                      <option value="<%= description.event_status %>" <%= requested_event.status_description === description.event_status ? 'selected' : '' %>>
+                      <option value="<%= description.status_id %>" <%= requested_event.status_id === description.status_id ? 'selected' : '' %>>
                         <%= description.status_description %>
                       </option>
                     <% }) %>
