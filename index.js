@@ -497,7 +497,7 @@ app.post('/add_login', (req, res) => {
   const { volunteer_email, role, password } = req.body;
 
   knex('login')
-    .insert({ email: volunteer_email, role_id: role, user_password: password })
+    .insert({ volunteer_email: volunteer_email, role_id: role_id, user_password: user_password })
     .then(() => res.redirect('/'))
     .catch(err => {
       console.error('Error adding login:', err);
