@@ -35,7 +35,7 @@
         >
     <label for="role">Role:</label>
     <select id="role" name="role">
-      <% roles.forEach(role => { %>
+      <% role.forEach(role => { %>
         <option value="<%= role.id %>"><%= role.name %></option>
       <% }); %>
     </select>
