@@ -115,6 +115,7 @@ app.get("/requested_event", isAuthenticated, (req, res) => {
     .join('host', 'requested_event.host_id', '=', 'host.host_id')
     .join('sewing_activity', 'requested_event.sewing_abbreviation', '=', 'sewing_activity.sewing_abbreviation')
     .join('status', 'requested_event.status_id', '=', 'status.status_id')
+    .leftJoin('completed_event', 'requested_event.event_number', '=', 'completed_event.event_number')
     .select(
       'requested_event.event_number',
       knex.raw("CONCAT(host.first_name, ' ', host.last_name) AS host"),
@@ -135,7 +136,8 @@ app.get("/requested_event", isAuthenticated, (req, res) => {
       'requested_event.jen_story',
       'requested_event.size_of_space',
       'status.status_description',
-      'requested_event.status_id'  // Include the current status_id
+      'requested_event.status_id',
+      'completed_event.event_start'  // Include the current status_id
     )
     .then((requested_events) => {
       if (!requested_events.length) {

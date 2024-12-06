@@ -98,6 +98,8 @@
                       </option>
                     <% }) %>
                   </select>
+                  <label for="event_start">Chosen Event Start Date</label>
+                  <input type="datetime-local" id="event_start" name="event_start" value="<%= requested_event.event_start %>" required>
                   <button type="submit">Save</button>
                 </form>                
               </td>
