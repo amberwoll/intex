@@ -274,7 +274,10 @@ app.get('/update_completed_events/:event_number', isAuthenticated, (req, res) =>
         return res.status(404).send('Event not found');
       }
       // Render the edit form, passing the event details
-      res.render('update_completed_events', { requested_event });
+      const event_start = requested_event.event_start
+        ? new Date(requested_event.event_start).toISOString().slice(0, 16)
+        : '';
+      res.render('update_completed_events', { requested_event: { ...requested_event, event_start } });
     })
     .catch(error => {
       console.error('Error fetching requested event:', error);
