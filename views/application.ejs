@@ -48,17 +48,13 @@
     </style>
 </head>
 <body>
-    <nav>
-        <div class="nav-container">
-            <a href="/" class="project-name">Turtle Shelter Project</a>
-            <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="/volunteer">Volunteer Application</a></li>
-            </ul>
-        </div>
     <h1 style="text-align: center;">Volunteer Application Form</h1>
-
     <form action="/application" method="POST">
+        <p>This form is for those interested in regularly helping in 
+            events hosted by the Turtle Shelter Project. We will keep you regularly 
+            updated as we have events come up! Please take extra care to ensure your
+            contact information is accurate.
+        </p>
         <!-- Contact Info -->
         <label for="first_name">First Name:</label>
         <input
@@ -87,7 +83,6 @@
             name="phone"
             required
         >
-
         <label for="volunteer_email">Email:</label>
         <input
             type="email"
