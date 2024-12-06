@@ -5,43 +5,72 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Requested Events</title>
     <style>
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+      }
+
+      h1 {
+        text-align: center;
+        margin: 20px 0;
+      }
+
+      .button-bar {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 20px;
+      }
+
+      button {
+        background-color: rgba(0, 0, 0, 0.7);
+        color: white;
+        border: none;
+        padding: 15px 30px;
+        font-size: 18px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        margin: 0 10px;
+      }
+
+      button:hover {
+        background-color: rgba(255, 255, 255, 0.7);
+        color: black;
+      }
+
       table {
         width: 100%;
         margin: 20px auto;
         border-collapse: collapse;
         font-size: 14px;
       }
-      th,
-      td {
+
+      th, td {
         border: 1px solid #ddd;
         padding: 8px;
         text-align: center;
         line-height: 1.4;
       }
+
       th {
         background-color: #f9f9f9;
         font-weight: bold;
       }
-      button {
-        padding: 6px 12px;
-        font-size: 14px;
-        cursor: pointer;
-        margin: 2px;
-      }
-      h1 {
-        text-align: center;
-        margin: 20px 0;
-      }
+
       .form-buttons {
         display: flex;
         justify-content: center;
         margin: 20px 0;
       }
+
       .form-container {
         display: flex;
         justify-content: center;
         margin: 20px 0;
       }
+
       .hidden {
         display: none;
       }
@@ -67,85 +96,84 @@
   </div>
     <h1>Requested Events</h1>
     <table>
-      <thead>
-        <tr>
-          <th>Host</th>
-          <th>Organization</th>
-          <th>Event Description</th>
-          <th>Street</th>
-          <th>City</th>
-          <th>State</th>
-          <th>Zip</th>
-          <th>Possible Date 1</th>
-          <th>Possible Date 2</th>
-          <th>Event Length</th>
-          <th>Sewing Activity</th>
-          <th>Number of Sewers</th>
-          <th>Number of Non-Sewers</th>
-          <th>Number of Children</th>
-          <th>Machine</th>
-          <th>Size of Space</th>
-          <th>Jen Story</th>
-          <th>Status</th>
-          <th>Chosen Event Start Date</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% if (requested_events.length > 0) { %>
-          <% requested_events.forEach(requested_event => { %>
-            <tr>
-              <input type="hidden" value="<%= requested_event.event_number %>">
-              <td><%= requested_event.host %></td>
-              <td><%= requested_event.organization %></td>
-              <td><%= requested_event.event_description %></td>
-              <td><%= requested_event.street %></td>
-              <td><%= requested_event.city %></td>
-              <td><%= requested_event.state %></td>
-              <td><%= requested_event.zip %></td>
-              <td><%= requested_event.possible_date_1 %></td>
-              <td><%= requested_event.possible_date_2 %></td>
-              <td><%= requested_event.event_length %></td>
-              <td><%= requested_event.sewing_description %></td>
-              <td><%= requested_event.number_of_sewers %></td>
-              <td><%= requested_event.number_of_nonsewers %></td>
-              <td><%= requested_event.number_of_children %></td>
-              <td><%= requested_event.machine %></td>
-              <td><%= requested_event.size_of_space %></td>
-              <td><%= requested_event.jen_story %></td>
-              <form action="/updateEventStatus/<%= requested_event.event_number %>" method="POST">
-                <td>
-                  <select id="status_id_<%= requested_event.event_number %>" name="status_id">
-                    <% event_status.forEach(description => { %>
-                      <option 
-                        value="<%= description.status_id %>" 
-                        <%= parseInt(requested_event.status_id, 10) === parseInt(description.status_id, 10) ? 'selected' : '' %>>
-                        <%= description.status_description %>
-                      </option>
-                    <% }) %>
-                  </select>
-                </td>
-                <td>
-                  <input type="datetime-local" 
-                         id="event_start_<%= requested_event.event_number %>" 
-                         name="event_start" 
-                         value="<%= requested_event.event_start || '' %>" 
-                         required>
-                </td>      
-                <td>
-                  <button type="submit">Save</button>
-                </td>
-              </form>                
-            </tr>
-          <% }) %>
-        <% } else { %>
+        <thead>
           <tr>
-            <td colspan="20">No data available</td>
+            <th>Host</th>
+            <th>Organization</th>
+            <th>Event Description</th>
+            <th>Street</th>
+            <th>City</th>
+            <th>State</th>
+            <th>Zip</th>
+            <th>Possible Date 1</th>
+            <th>Possible Date 2</th>
+            <th>Event Length</th>
+            <th>Sewing Activity</th>
+            <th>Number of Sewers</th>
+            <th>Number of Non-Sewers</th>
+            <th>Number of Children</th>
+            <th>Machine</th>
+            <th>Size of Space</th>
+            <th>Jen Story</th>
+            <th>Status</th>
+            <th>Chosen Event Start Date</th>
+            <th>Actions</th>
           </tr>
-        <% } %>
-      </tbody>
-    </table>
-
+        </thead>
+        <tbody>
+          <% if (requested_events.length > 0) { %>
+            <% requested_events.forEach(requested_event => { %>
+              <tr>
+                <input type="hidden" value="<%= requested_event.event_number %>">
+                <td><%= requested_event.host %></td>
+                <td><%= requested_event.organization %></td>
+                <td><%= requested_event.event_description %></td>
+                <td><%= requested_event.street %></td>
+                <td><%= requested_event.city %></td>
+                <td><%= requested_event.state %></td>
+                <td><%= requested_event.zip %></td>
+                <td><%= requested_event.possible_date_1 %></td>
+                <td><%= requested_event.possible_date_2 %></td>
+                <td><%= requested_event.event_length %></td>
+                <td><%= requested_event.sewing_description %></td>
+                <td><%= requested_event.number_of_sewers %></td>
+                <td><%= requested_event.number_of_nonsewers %></td>
+                <td><%= requested_event.number_of_children %></td>
+                <td><%= requested_event.machine %></td>
+                <td><%= requested_event.size_of_space %></td>
+                <td><%= requested_event.jen_story %></td>
+                <form action="/updateEventStatus/<%= requested_event.event_number %>" method="POST">
+                  <td>
+                    <select id="status_id_<%= requested_event.event_number %>" name="status_id">
+                      <% event_status.forEach(description => { %>
+                        <option 
+                          value="<%= description.status_id %>" 
+                          <%= parseInt(requested_event.status_id, 10) === parseInt(description.status_id, 10) ? 'selected' : '' %>>
+                          <%= description.status_description %>
+                        </option>
+                      <% }) %>
+                    </select>
+                  </td>
+                  <td>
+                    <input type="datetime-local" 
+                           id="event_start_<%= requested_event.event_number %>" 
+                           name="event_start" 
+                           value="<%= requested_event.event_start || '' %>" 
+                           required>
+                  </td>      
+                  <td>
+                    <button type="submit">Save</button>
+                  </td>
+                </form>                
+              </tr>
+            <% }) %>
+          <% } else { %>
+            <tr>
+              <td colspan="20">No data available</td>
+            </tr>
+          <% } %>
+        </tbody>
+      </table>
     <div class="form-buttons">
       <form action="/host" method="GET">
         <button type="submit">Add New Event</button>
