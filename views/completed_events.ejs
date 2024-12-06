@@ -1,42 +1,85 @@
-<!-- Completed events and their stats -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Completed Events</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        table {
+            width: 100%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+            line-height: 1.4;
+        }
+
+        th {
+            background-color: #f9f9f9;
+            font-weight: bold;
+        }
+
+        button {
+            padding: 6px 12px;
+            font-size: 14px;
+            cursor: pointer;
+            margin: 2px;
+        }
+
+        h1 {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .form-buttons {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+    </style>
 </head>
 <body>
-    <h1 style="text-align: center;">Completed Events</h1>
-  <table>
-    <thead>
-      <tr>
-        <th>Host Name</th>
-        <th>Description</th>
-        <th>Organization</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% if (completed_events.length > 0) { %>
-        <% completed_events.forEach(row => { %>
-          <tr>
-            <input type="hidden" value="row.event_number">
-            <td><%= row.name %></td>
-            <td><%= row.event_description %></td>
-            <td><%= row.organization %></td>
-            <td>
-              <form action="/update_completed_events/<%= row.event_number %>" method="GET" style="display:inline;">
-                <button type="submit">Update</button>
-              </form>
-            </td>
-          </tr>
-        <% }) %>
-      <% } else { %>
-        <tr>
-          <td colspan="7">No data available</td>
-        </tr>
-      <% } %>
-    </tbody>
-  </table>
+    <h1>Completed Events</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Host Name</th>
+                <th>Description</th>
+                <th>Organization</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% if (completed_events.length > 0) { %>
+                <% completed_events.forEach(row => { %>
+                    <tr>
+                        <td><%= row.name %></td>
+                        <td><%= row.event_description %></td>
+                        <td><%= row.organization %></td>
+                        <td>
+                            <form action="/update_completed_events/<%= row.event_number %>" method="GET">
+                                <button type="submit">Update</button>
+                            </form>
+                        </td>
+                    </tr>
+                <% }) %>
+            <% } else { %>
+                <tr>
+                    <td colspan="4">No data available</td>
+                </tr>
+            <% } %>
+        </tbody>
+    </table>
 </body>
 </html>
