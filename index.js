@@ -497,7 +497,7 @@ app.post('/login/:volunteer_email', (req, res) => {
   knex('login')
   .where({volunteer_email: volunteer_email})
   .update(
-    role_id
+    {role_id}
   )
   .then(() => res.redirect('/login'))
   .catch((error) => {
@@ -527,6 +527,13 @@ app.post('/add_login', (req, res) => {
     });
 });
 
+app.get('/admin_login', (res, req) => {
+
+});
+
+app.post('/admin_login', (req, res) => {
+
+});
 
 // START SERVER
 app.listen(port, () => {
