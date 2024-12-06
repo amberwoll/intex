@@ -210,7 +210,7 @@ app.post('/host', (req, res) => {
         })
         .returning('host_id'); 
 
-      console.log('host_id');
+      console.log('HOST', host_id);
 
       // Insert into 'requested_events' table, using the retrieved 'host_id'
       await trx('requested_event').insert({
