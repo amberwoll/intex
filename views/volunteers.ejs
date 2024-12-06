@@ -77,6 +77,13 @@
               <td><%= volunteer.sewing_preference %></td>
               <td><%= volunteer.leadership ? "Yes" : "No" %></td>
               <td>
+                <form action="/add_login" method="GET">
+                  <input type="hidden" name="volunteer_email" value="<%= volunteer.volunteer_email %>">
+                  <button type="submit">Add Administrative Privileges</button>
+                </form>
+                
+              </td>
+              <td>
                 <!-- Edit Button -->
                 <form
                   action="/editVolunteer/<%= volunteer.volunteer_id %>"

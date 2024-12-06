@@ -485,11 +485,26 @@ app.get('/login', (req, res) => {
 
 
 app.get('/add_login', (req, res) => {
+  const volunteerEmail = req.query.volunteer_email;
   knex('v_role')
   .then((role) => {
-    res.render('add_login', { role })
+    res.render('add_login', { role, volunteerEmail })
   })
 });
+
+
+app.post('/add_login', (req, res) => {
+  const { volunteer_email, role, password } = req.body;
+
+  knex('login')
+    .insert({ email: volunteer_email, role_id: role, user_password: password })
+    .then(() => res.redirect('/'))
+    .catch(err => {
+      console.error('Error adding login:', err);
+      res.status(500).send('Internal Server Error: Add Login');
+    });
+});
+
 
 // START SERVER
 app.listen(port, () => {
