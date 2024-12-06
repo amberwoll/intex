@@ -6,6 +6,20 @@
     <title>Update Completed Event</title>
 </head>
 <body>
+    <div class="button-bar">
+        <form action="/requested_event" method="GET">
+            <button type="submit">Requested Events</button>
+        </form>
+        <form action="/completed_events" method="GET">
+            <button type="submit">Completed Events</button>
+        </form>
+        <form action="/volunteers" method="GET">
+            <button type="submit">Volunteer Management</button>
+        </form>
+        <form action="/login" method="GET">
+            <button type="submit">Edit User Accounts</button>
+        </form>
+    </div>
     <h1>Update Completed Event</h1>
     <form action="/save_completed_events/<%= requested_event.event_number %>" method="POST">
         <!-- Event Start -->
