@@ -21,7 +21,7 @@ Ensure your system meets the following prerequisites before installing the progr
 - **Operating System**: Windows 10 or later, macOS, or Linux.
 - **Software**:
   - Node.js (for server-side development)
-  - npm or yarn (for dependency management)
+  - npm (for dependency management)
   - AWS CLI (for managing AWS services)
   - PostgreSQL (for database management)
   - Tableau (for creating the dashboard)
