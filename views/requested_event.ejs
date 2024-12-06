@@ -77,7 +77,7 @@
       <tbody>
         <% if (requested_events.length > 0) { %>
           <% requested_events.forEach(requested_event => { %>
-            <tr>
+            <tr data-status-id="<%= requested_event.status_id %>">
               <input type="hidden" value="<%= requested_event.event_number %>">
               <td><%= requested_event.host %></td>
               <td><%= requested_event.organization %></td>
@@ -147,5 +147,36 @@
         <button type="submit">Home</button>
       </form>
     </div>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const rows = document.querySelectorAll('tr[data-status-id]'); // Select all rows with the data-status-id attribute
+
+        rows.forEach(row => {
+          const statusId = row.getAttribute('data-status-id');
+          const eventNumber = row.querySelector('input[type="hidden"]').value;
+          const datePicker = row.querySelector(`#event_start_${eventNumber}`);
+          const statusSelect = row.querySelector(`#status_id_${eventNumber}`);
+
+          // Initialize date picker state based on initial status
+          toggleDatePicker(statusId, datePicker);
+
+          // Listen for changes to the status dropdown
+          statusSelect.addEventListener('change', function() {
+            const newStatusId = statusSelect.value;
+            toggleDatePicker(newStatusId, datePicker);
+          });
+
+          function toggleDatePicker(statusId, datePicker) {
+            // Enable or disable the date picker based on the status
+            if (statusId === '1' || statusId === '2') {
+              datePicker.disabled = false; // Enable if status is 'approved' or 'completed'
+            } else {
+              datePicker.disabled = true; // Disable for other statuses
+            }
+          }
+        });
+      });
+    </script>
   </body>
 </html>
