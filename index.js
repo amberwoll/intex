@@ -464,26 +464,46 @@ app.post('/updateEventStatus/:event_number', async (req, res) => {
   try {
     // Use a transaction for consistency
     await knex.transaction(async (trx) => {
-      // Update the status in the `requested_events` table
+      // Update the status in the `requested_event` table
       await trx('requested_event')
         .where({ event_number: event_number })
         .update({ status_id });
 
-      // Check if the event exists in the `completed_events` table
+      // Check if the event exists in the `completed_event` table
       const completed_event = await trx('completed_event')
         .where({ event_number: event_number })
         .first();
 
-      // If not found, insert a new row
-      if (!completed_event) {
-        await trx('completed_event').insert({ event_number: event_number });
+      // If the status is approved or completed and no row exists in completed_event, insert a new row
+      if ((status_id === 'approved' || status_id === 'completed') && !completed_event) {
+        await trx('completed_event').insert({
+          event_number: event_number,
+          status_date: null, // Set to null initially, will be updated manually by the user
+        });
       }
     });
 
-    // Redirect back to the requested events page or send a success response
-    res.redirect('/requested_event');
+    // If the status is approved or completed, send a success response
+    res.json({ success: true, message: 'Event status updated and row created in completed_event.' });
   } catch (error) {
     console.error('Error updating event status:', error);
+    res.status(500).send('Internal Server Error');
+  }
+});
+
+app.post('/updateStatusDate/:event_number', async (req, res) => {
+  const event_number = parseInt(req.params.event_number, 10);
+  const { status_date } = req.body;
+
+  try {
+    // Update the completed_event table with the selected status date
+    await knex('completed_event')
+      .where({ event_number: event_number })
+      .update({ status_date });
+
+    res.status(200).send('Date saved successfully');
+  } catch (error) {
+    console.error('Error updating status date:', error);
     res.status(500).send('Internal Server Error');
   }
 });
