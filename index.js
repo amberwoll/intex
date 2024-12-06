@@ -321,7 +321,7 @@ app.get("/volunteers", (req, res) => {
     .join("sewing_activity", "volunteer.preference", "=", "sewing_activity.sewing_abbreviation") // Join with sewing levels
     .join("sewing_skill", "volunteer.sewing_level", "=", "sewing_skill.sewing_level") // Join with sewing skill
     .leftJoin("login", "volunteer.volunteer_email", "=", "login.volunteer_email")
-    .join("v_role", "login.role_id", "=", "v_role.role_id") // Join with the login table
+    .leftJoin("v_role", "login.role_id", "=", "v_role.role_id") // Join with the login table
     .select(
       "volunteer.*",
       "reference.reference_description as reference_description",
