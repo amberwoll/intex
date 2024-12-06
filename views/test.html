@@ -47,7 +47,8 @@
         font-size: 14px;
       }
 
-      th, td {
+      th,
+      td {
         border: 1px solid #ddd;
         padding: 8px;
         text-align: center;
@@ -72,16 +73,16 @@
         <button type="submit">Admin Main</button>
       </form>
       <form action="/requested_event" method="GET">
-          <button type="submit">Requested Events</button>
+        <button type="submit">Requested Events</button>
       </form>
       <form action="/completed_events" method="GET">
-          <button type="submit">Completed Events</button>
+        <button type="submit">Completed Events</button>
       </form>
       <form action="/volunteers" method="GET">
-          <button type="submit">Volunteer Management</button>
+        <button type="submit">Volunteer Management</button>
       </form>
       <form action="/login" method="GET">
-          <button type="submit">Edit User Accounts</button>
+        <button type="submit">Edit User Accounts</button>
       </form>
     </div>
     <h1>Volunteer Records</h1>
@@ -105,73 +106,77 @@
         </tr>
       </thead>
       <tbody>
-        <% if (volunteers.length > 0) { %>
-          <% volunteers.forEach(volunteer => { %>
-            <tr>
-              <input type="hidden" value="volunteer.volunteer_id">
-              <td><%= volunteer.first_name %></td>
-              <td><%= volunteer.last_name %></td>
-              <td><%= volunteer.sewing_description %></td>
-              <td><%= volunteer.phone %></td>
-              <td><%= volunteer.reference_description %></td>
-              <td><%= volunteer.number_of_hours %></td>
-              <td><%= volunteer.email_list ? "Yes" : "No" %></td>
-              <td><%= volunteer.volunteer_email %></td>
-              <td><%= volunteer.city %></td>
-              <td><%= volunteer.zip %></td>
-              <td><%= volunteer.sewing_preference %></td>
-              <td><%= volunteer.leadership ? "Yes" : "No" %></td>
-              <td>
-                <% if (volunteer.role_id) { %> 
-                  <!-- Display the role if a role exists -->
-                  <span><%= volunteer.position %></span>
-                <% } else { %>
-                  <!-- Otherwise, show the "Add Administrative Privileges" button -->
-                  <form action="/add_login" method="GET">
-                    <input type="hidden" name="volunteer_email" value="<%= volunteer.volunteer_email %>">
-                    <button type="submit">Add Administrative Privileges</button>
-                  </form>
-                <% } %>
-              </td>
-              <td>
-                <!-- Edit Button -->
-                <form
-                  action="/editVolunteer/<%= volunteer.volunteer_id %>"
-                  method="GET"
-                  style="display: inline"
-                >
-                  <button type="submit">Edit</button>
-                </form>
-                <!-- Delete Button -->
-                <form
-                  action="/deleteVolunteer/<%= volunteer.volunteer_email %>"
-                  method="POST"
-                  style="display: inline;"
-                >
-                  <button
-                    type="submit"
-                    aria-label="Delete Volunteer"
-                    onclick="return confirm('Are you sure you want to delete this volunteer? This action cannot be undone.');"
-                    style="
-                      background-color: #e74c3c;
-                      color: white;
-                      border: none;
-                      padding: 6px 12px;
-                      font-size: 14px;
-                      cursor: pointer;
-                      border-radius: 4px;
-                    "
-                  >
-                    Delete
-                  </button>
-                </form>
-              </td>
-            </tr>
-          <% }) %>
-        <% } else { %>
-          <tr>
-            <td colspan="14">No data available</td>
-          </tr>
+        <% if (volunteers.length > 0) { %> <% volunteers.forEach(volunteer => {
+        %>
+        <tr>
+          <input type="hidden" value="volunteer.volunteer_id" />
+          <td><%= volunteer.first_name %></td>
+          <td><%= volunteer.last_name %></td>
+          <td><%= volunteer.sewing_description %></td>
+          <td><%= volunteer.phone %></td>
+          <td><%= volunteer.reference_description %></td>
+          <td><%= volunteer.number_of_hours %></td>
+          <td><%= volunteer.email_list ? "Yes" : "No" %></td>
+          <td><%= volunteer.volunteer_email %></td>
+          <td><%= volunteer.city %></td>
+          <td><%= volunteer.zip %></td>
+          <td><%= volunteer.sewing_preference %></td>
+          <td><%= volunteer.leadership ? "Yes" : "No" %></td>
+          <td>
+            <% if (volunteer.role_id) { %>
+            <!-- Display the role if a role exists -->
+            <span><%= volunteer.position %></span>
+            <% } else { %>
+            <!-- Otherwise, show the "Add Administrative Privileges" button -->
+            <form action="/add_login" method="GET">
+              <input
+                type="hidden"
+                name="volunteer_email"
+                value="<%= volunteer.volunteer_email %>"
+              />
+              <button type="submit">Add Administrative Privileges</button>
+            </form>
+            <% } %>
+          </td>
+          <td>
+            <!-- Edit Button -->
+            <form
+              action="/editVolunteer/<%= volunteer.volunteer_id %>"
+              method="GET"
+              style="display: inline"
+            >
+              <button type="submit">Edit</button>
+            </form>
+            <br><br>
+            <!-- Delete Button -->
+            <form
+              action="/deleteVolunteer/<%= volunteer.volunteer_email %>"
+              method="POST"
+              style="display: inline"
+            >
+              <button
+                type="submit"
+                aria-label="Delete Volunteer"
+                onclick="return confirm('Are you sure you want to delete this volunteer? This action cannot be undone.');"
+                style="
+                  background-color: #e74c3c;
+                  color: white;
+                  border: none;
+                  padding: 6px 12px;
+                  font-size: 14px;
+                  cursor: pointer;
+                  border-radius: 4px;
+                "
+              >
+                Delete
+              </button>
+            </form>
+          </td>
+        </tr>
+        <% }) %> <% } else { %>
+        <tr>
+          <td colspan="14">No data available</td>
+        </tr>
         <% } %>
       </tbody>
     </table>

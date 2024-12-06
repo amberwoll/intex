@@ -1,104 +1,135 @@
-<!-- this will be the LOGIN page -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Login</title>
     <style>
-        table {
-          width: 100%;
-          margin: 20px auto;
-          border-collapse: collapse;
-          font-size: 12px;
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
         }
-        th, td {
-          border: 1px solid #ddd;
-          padding: 8px;
-          text-align: center;
-        }
-        th {
-          background-color: #f2f2f2;
-          font-weight: bold;
-        }
-        button {
-          padding: 4px 8px;
-          margin: 2px;
-          font-size: 12px;
-          cursor: pointer;
-        }
+
         h1 {
-          text-align: center;
-          margin: 20px 0;
+            text-align: center;
+            margin: 20px 0;
         }
-        .form-container {
-          display: flex;
-          justify-content: center;
-          margin: 20px 0;
+
+        .button-bar {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
         }
-      </style>
+
+        button {
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 18px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin: 0 10px;
+        }
+
+        button:hover {
+            background-color: rgba(255, 255, 255, 0.7);
+            color: black;
+        }
+
+        table {
+            width: 100%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+            line-height: 1.4;
+        }
+
+        th {
+            background-color: #f9f9f9;
+            font-weight: bold;
+        }
+
+        .form-container, .form-buttons {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+
+    </style>
 </head>
 <body>
-  <div class="button-bar">
-    <form action="/admin_landing" method="GET">
-      <button type="submit">Admin Main</button>
-    </form>
-    <form action="/requested_event" method="GET">
-        <button type="submit">Requested Events</button>
-    </form>
-    <form action="/completed_events" method="GET">
-        <button type="submit">Completed Events</button>
-    </form>
-    <form action="/volunteers" method="GET">
-        <button type="submit">Volunteer Management</button>
-    </form>
-    <form action="/login" method="GET">
-        <button type="submit">Edit User Accounts</button>
-    </form>
-  </div>
+    <div class="button-bar">
+        <form action="/admin_landing" method="GET">
+            <button type="submit">Admin Main</button>
+        </form>
+        <form action="/requested_event" method="GET">
+            <button type="submit">Requested Events</button>
+        </form>
+        <form action="/completed_events" method="GET">
+            <button type="submit">Completed Events</button>
+        </form>
+        <form action="/volunteers" method="GET">
+            <button type="submit">Volunteer Management</button>
+        </form>
+        <form action="/login" method="GET">
+            <button type="submit">Edit User Accounts</button>
+        </form>
+    </div>
     <h1>LOGIN</h1>
-    <form action="/" method="GET">
-        <button type="submit">Home</button>
-      </form>
-      <table>
+    <table>
         <thead>
-          <tr>
-            <th>Email</th>
-            <th>Password</th>
-            <th>Role</th>
-          </tr>
+            <tr>
+                <th>Email</th>
+                <th>Password</th>
+                <th>Role</th>
+            </tr>
         </thead>
         <tbody>
-          <% if (login.length > 0) { %>
-            <% login.forEach(row => { %>
-              <tr>
-                <td><%= row.volunteer_email %></td>
-                <td><%= row.user_password %></td>
-                <td>
-                    <form action="/login/<%= row.volunteer_email %>" method="POST">
-                      <select id="role_id" name="role_id">
-                        <% role.forEach(roleRow => { %> <!-- loop through roles -->
-                          <option 
-                            value="<%= roleRow.role_id %>" 
-                            <%= parseInt(row.role_id, 10) === parseInt(roleRow.role_id, 10) ? 'selected' : '' %>>
-                            <%= roleRow.position_title %>
-                          </option>
-                        <% }) %>
-                      </select>
-                      <button type="submit">Save</button>
-                    </form>
-                  </td>                  
-              </tr>
-            <% }) %>
-          <% } else { %>
-            <tr>
-              <td colspan="7">No data available</td>
-            </tr>
-          <% } %>
+            <% if (login.length > 0) { %>
+                <% login.forEach(row => { %>
+                    <tr>
+                        <td><%= row.volunteer_email %></td>
+                        <td><%= row.user_password %></td>
+                        <td>
+                            <form action="/login/<%= row.volunteer_email %>" method="POST">
+                                <select id="role_id" name="role_id">
+                                    <% role.forEach(roleRow => { %> <!-- loop through roles -->
+                                        <option 
+                                            value="<%= roleRow.role_id %>" 
+                                            <%= parseInt(row.role_id, 10) === parseInt(roleRow.role_id, 10) ? 'selected' : '' %>>
+                                            <%= roleRow.position_title %>
+                                        </option>
+                                    <% }) %>
+                                </select>
+                                <button type="submit">Save</button>
+                            </form>
+                        </td>
+                    </tr>
+                <% }) %>
+            <% } else { %>
+                <tr>
+                    <td colspan="3">No data available</td>
+                </tr>
+            <% } %>
         </tbody>
-      </table>
-      <form action="/volunteers" method="GET">
-        <button type="submit">Add Administrative Privileges to a Volunteer</button>
-      </form>
+    </table>
+    <div class="form-buttons">
+        <form action="/volunteers" method="GET">
+            <button type="submit">Add Administrative Privileges to a Volunteer</button>
+        </form>
+        <form action="/" method="GET">
+            <button type="submit">Home</button>
+        </form>
+    </div>
 </body>
 </html>
