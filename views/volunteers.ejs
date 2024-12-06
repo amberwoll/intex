@@ -145,18 +145,18 @@
               method="GET"
               style="
                 display: inline;
-                background-color: rgba(0, 0, 0, 0.7);
+                background-color: #555; /* Neutral gray to differentiate from the delete button */
                 color: white;
                 border: none;
                 padding: 6px 12px;
                 font-size: 14px;
                 cursor: pointer;
                 border-radius: 4px;
+                margin-right: 10px; /* Added margin for spacing between buttons */
               "
             >
               <button type="submit">Edit</button>
             </form>
-            <br /><br />
             <!-- Delete Button -->
             <form
               action="/deleteVolunteer/<%= volunteer.volunteer_email %>"
@@ -168,7 +168,7 @@
                 aria-label="Delete Volunteer"
                 onclick="return confirm('Are you sure you want to delete this volunteer? This action cannot be undone.');"
                 style="
-                  background-color: #e74c3c;
+                  background-color: #e74c3c; /* Red color for deletion for immediate visual distinction */
                   color: white;
                   border: none;
                   padding: 6px 12px;
