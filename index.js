@@ -475,22 +475,25 @@ app.post('/updateEventStatus/:event_number', async (req, res) => {
 // get function to show existing users and by able to add and delete and edit roles
 app.get('/login', (req, res) => {
   knex('login')
-  .select("")
-  .then((login) => {
-    knex('v_role')
-    .select("")
-    .then((role) => {
-      res.render("login", { role, login })
+    .join('v_role', 'login.role_id', '=', 'v_role.role_id') // Make sure you join roles properly
+    .select("login.*", "v_role.position_title as position")
+    .then((login) => {
+      knex('v_role').select() // Assuming you need to list all roles for the select options
+        .then((role) => {
+          res.render("login", { login, role }); // Pass both login and roles
+        });
     })
-  })
-  .catch((error) => {
-    console.error("Error fetching login:", error.message);
-    res.status(500).send("Internal Server Error 10");
-  });
+    .catch((error) => {
+      console.error("Error fetching login:", error.message);
+      res.status(500).send("Internal Server Error");
+    });
 });
 
 
+
 app.post('/login/:volunteer_email', (req, res) => {
+  const {volunteer_email} = req.params;
+  const {role_id}= req.body;
   knex('login')
   .where({volunteer_email: volunteer_email})
   .update(
@@ -501,7 +504,7 @@ app.post('/login/:volunteer_email', (req, res) => {
     console.error("Error fetching login 2:", error.message);
     res.status(500).send("Internal Server Error login 2");
   })
-})
+});
 
 app.get('/add_login', (req, res) => {
   const volunteerEmail = req.query.volunteer_email;

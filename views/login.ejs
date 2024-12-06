@@ -58,19 +58,19 @@
                 <td><%= row.volunteer_email %></td>
                 <td><%= row.user_password %></td>
                 <td>
-                  <form action="/login/<%= login.volunteer_email %>" method="POST">
-                    <select id="role_id" name="role_id">
-                      <% role.forEach(row => { %>
-                        <option 
-                          value="<%= row.role_id %>" 
-                          <%= parseInt(row.role_id, 10) === parseInt(login.role_id, 10) ? 'selected' : '' %>>
-                          <%= row.position_title %>
-                        </option>
-                      <% }) %>
-                    </select>
-                    <button type="submit">Save</button>
-                  </form>                
-                </td>
+                    <form action="/login/<%= row.volunteer_email %>" method="POST">
+                      <select id="role_id" name="role_id">
+                        <% role.forEach(roleRow => { %> <!-- loop through roles -->
+                          <option 
+                            value="<%= roleRow.role_id %>" 
+                            <%= parseInt(row.role_id, 10) === parseInt(roleRow.role_id, 10) ? 'selected' : '' %>>
+                            <%= roleRow.position_title %>
+                          </option>
+                        <% }) %>
+                      </select>
+                      <button type="submit">Save</button>
+                    </form>
+                  </td>                  
               </tr>
             <% }) %>
           <% } else { %>
