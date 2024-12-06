@@ -490,7 +490,7 @@ app.post('/updateEventStatus/:event_number', async (req, res) => {
 
 //login page
 // get function to show existing users and by able to add and delete and edit roles
-app.get('/login', (req, res) => {
+app.get('/login', isAuthenticated, (req, res) => {
   knex('login')
     .join('v_role', 'login.role_id', '=', 'v_role.role_id') // Make sure you join roles properly
     .select("login.*", "v_role.position_title as position")
