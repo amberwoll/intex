@@ -478,17 +478,15 @@ app.post('/updateEventStatus/:event_number', async (req, res) => {
           .where({ event_number: event_number })
           .first();
 
-        // If not found, insert a new row
+        // If not found, insert a new row into `completed_event` table
         if (!completed_event) {
           await trx('completed_event').insert({ event_number: event_number });
         }
 
-        // If the event start is provided (not null or undefined), update it in the `completed_event` table
-        if (!event_start) {
-          await trx('completed_event')
-            .where({ event_number: event_number })
-            .update({ event_start: event_start });
-        }
+        // Always update the `event_start` in the `completed_event` table
+        await trx('completed_event')
+          .where({ event_number: event_number })
+          .update({ event_start: event_start });
       }
     });
 
@@ -499,6 +497,8 @@ app.post('/updateEventStatus/:event_number', async (req, res) => {
     res.status(500).send('Internal Server Error');
   }
 });
+
+
 
 
 
