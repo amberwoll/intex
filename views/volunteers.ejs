@@ -80,7 +80,7 @@
               <td>
                 <% if (volunteer.role_id) { %> 
                   <!-- Display the role if a role exists -->
-                  <span><%= volunteer.role_id %></span>
+                  <span><%= volunteer.position_title %></span>
                 <% } else { %>
                   <!-- Otherwise, show the "Add Administrative Privileges" button -->
                   <form action="/add_login" method="GET">

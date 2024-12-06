@@ -303,14 +303,16 @@ app.get("/volunteers", (req, res) => {
     .join("reference", "volunteer.reference_id", "=", "reference.reference_id") // Join with the reference table
     .join("sewing_activity", "volunteer.preference", "=", "sewing_activity.sewing_abbreviation") // Join with sewing levels
     .join("sewing_skill", "volunteer.sewing_level", "=", "sewing_skill.sewing_level") // Join with sewing skill
-    .leftJoin("login", "volunteer.volunteer_email", "=", "login.volunteer_email") // Join with the login table
+    .leftJoin("login", "volunteer.volunteer_email", "=", "login.volunteer_email")
+    .join("v_role", "login.role_id", "=", "v_role.role_id") // Join with the login table
     .select(
       "volunteer.*",
       "reference.reference_description as reference_description",
       "sewing_activity.sewing_description as sewing_preference",
       "sewing_skill.sewing_ability as sewing_description",
-      "login.role_id as role_id", // Assuming the login table has an 'email' field
-      "login.user_password as user_password" // Assuming the login table has a 'username' field
+      "login.role_id as role_id", 
+      "login.user_password as user_password",
+      "v_role.position_title as position"
     )
     .then((volunteers) => {
       res.render("volunteers", { volunteers });
