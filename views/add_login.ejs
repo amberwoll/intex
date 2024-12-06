@@ -34,11 +34,18 @@
         readonly
         >
     <label for="role">Role:</label>
-    <select id="role" name="role">
-      <% role.forEach(role => { %>
-        <option value="<%= role.id %>"><%= role.name %></option>
-      <% }); %>
-    </select>
+    <form action="/login/<%= login.volunteer_email %>" method="POST">
+        <select id="role_id" name="role_id">
+          <% role.forEach(row => { %>
+            <option 
+              value="<%= row.role_id %>" 
+              <%= parseInt(login.role_id, 10) === parseInt(row.role_id, 10) ? 'selected' : '' %>>
+              <%= row.position_title %>
+            </option>
+          <% }) %>
+        </select>
+        <button type="submit">Save</button>
+      </form>   
     <br>
     <label for="user_password">Password:</label>
     <button type="submit">Add Login</button>
