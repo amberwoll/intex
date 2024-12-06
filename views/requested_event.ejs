@@ -36,55 +36,6 @@
         margin: 20px 0;
       }
     </style>
-    <script>
-      function handleFormSubmit(event, eventNumber) {
-        event.preventDefault(); // Prevent the form from submitting normally
-        const form = event.target;
-        const statusId = form.querySelector('select[name="status_id"]').value;
-
-        fetch(`/updateEventStatus/${eventNumber}`, {
-          method: 'POST',
-          body: new FormData(form),
-        })
-        .then(response => response.json())
-        .then(data => {
-          if (data.success) {
-            // Show an alert to notify the user
-            if (statusId === 'approved' || statusId === 'completed') {
-              alert('Event marked as approved/completed! Please enter the status date below.');
-              // Optionally, show the date input field if not already visible
-              document.getElementById('date-input-section').style.display = 'block';
-              // Store event number for later use
-              document.getElementById('status_date_form').dataset.eventNumber = eventNumber;
-            } else {
-              location.reload(); // Reload the page to show the updated status
-            }
-          }
-        })
-        .catch(error => {
-          console.error('Error:', error);
-        });
-      }
-
-      function saveDate() {
-        const form = document.getElementById('status_date_form');
-        const eventNumber = form.dataset.eventNumber;
-        const statusDate = form.querySelector('input[name="status_date"]').value;
-
-        fetch(`/updateStatusDate/${eventNumber}`, {
-          method: 'POST',
-          body: JSON.stringify({ status_date: statusDate }),
-          headers: { 'Content-Type': 'application/json' },
-        })
-        .then(response => {
-          alert('Date saved successfully!');
-          location.reload(); // Reload the page after saving the date
-        })
-        .catch(error => {
-          console.error('Error:', error);
-        });
-      }
-    </script>
   </head>
   <body>
     <h1>Requested Events</h1>
@@ -137,7 +88,7 @@
               <td><%= requested_event.size_of_space %></td>
               <td><%= requested_event.jen_story %></td>
               <td>
-                <form action="/updateEventStatus/<%= requested_event.event_number %>" method="POST" onsubmit="handleFormSubmit(event, <%= requested_event.event_number %>)">
+                <form action="/updateEventStatus/<%= requested_event.event_number %>" method="POST">
                   <select id="status_id" name="status_id">
                     <% event_status.forEach(description => { %>
                       <option 
@@ -159,14 +110,5 @@
         <% } %>
       </tbody>
     </table>
-
-    <!-- Section for date input after status update -->
-    <div id="date-input-section" style="display: none;">
-      <h2>Enter the Date for Status Change</h2>
-      <form id="status_date_form">
-        <input type="date" name="status_date" required />
-        <button type="button" onclick="saveDate()">Save Date</button>
-      </form>
-    </div>
   </body>
 </html>
