@@ -1,6 +1,8 @@
 // Node & Express Setup
 let express = require("express");
 let app = express();
+let session = require('express-session');
+let bodyParser = require('body-parser');
 let path = require("path");
 const port = process.env.PORT;
 
@@ -24,6 +26,21 @@ const knex = require("knex") ({
     }
 
 })
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(session({
+  secret: 'your-secret-key',
+  resave: false,
+  saveUninitialized: true
+}));
+
+// Middleware to check if a user is logged in
+function isAuthenticated(req, res, next) {
+  if (req.session && req.session.user) {
+    return next();
+  }
+  res.redirect('/admin_login');
+}
 
 // INDEX PAGE
 app.get("/", (req, res) => {
@@ -531,8 +548,28 @@ app.get('/admin_login', (req, res) => {
   res.render('admin_login');
 });
 
-app.post('/admin_login', (req, res) => {
 
+
+// Handle login submission
+app.post('/admin_login', async (req, res) => {
+  const { volunteer_email, user_password } = req.body;
+
+  try {
+    const user = await knex('login')
+      .select('*')
+      .where({ volunteer_email: volunteer_email, user_password: user_password }) // Simple check, no hashing
+      .first();
+
+    if (user) {
+      req.session.user = user; // Store user data in session
+      res.redirect('/admin_landing');
+    } else {
+      res.send('Invalid credentials. <a href="/login">Try again</a>.');
+    }
+  } catch (error) {
+    console.error("Error querying the database:", error.message);
+    res.status(500).send("Internal Server Error.");
+  }
 });
 
 // START SERVER
