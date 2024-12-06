@@ -21,8 +21,8 @@ This project involves creating a comprehensive data management solution for a no
 
 ## Website Details
 - URL: https://volunteer-turtleshelterproject.org/
-- ADMIN EMAIL: grace.taylor@example.com
-- ADMIN PASSWORD: grace
+- ADMIN EMAIL: jen@gmail.com
+- ADMIN PASSWORD: jen
 
 ## How to Use
 - Index page

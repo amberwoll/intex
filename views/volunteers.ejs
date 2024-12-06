@@ -134,7 +134,7 @@
                 name="volunteer_email"
                 value="<%= volunteer.volunteer_email %>"
               />
-              <button type="submit">Add Administrative Privileges</button>
+              <button type="submit">Grant Access</button>
             </form>
             <% } %>
           </td>
@@ -143,7 +143,16 @@
             <form
               action="/editVolunteer/<%= volunteer.volunteer_id %>"
               method="GET"
-              style="display: inline"
+              style="
+                display: inline;
+                background-color: rgba(0, 0, 0, 0.7);
+                color: white;
+                border: none;
+                padding: 6px 12px;
+                font-size: 14px;
+                cursor: pointer;
+                border-radius: 4px;
+              "
             >
               <button type="submit">Edit</button>
             </form>
@@ -182,7 +191,7 @@
     </table>
     <div class="form-buttons">
       <form action="/application" method="GET">
-        <button type="submit">Grant Access</button>
+        <button type="submit">Add Volunteer</button>
       </form>
       <form action="/" method="GET">
         <button type="submit">Home</button>
