@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Volunteer Records</title>
+    <title>Turtle Shelter Project</title>
     <style>
       body {
         margin: 0;
@@ -128,14 +128,29 @@
             <span><%= volunteer.position %></span>
             <% } else { %>
             <!-- Otherwise, show the "Add Administrative Privileges" button -->
-            <form action="/add_login" method="GET">
+            <form action="/add_login" method="GET" style="display: inline">
               <input
                 type="hidden"
                 name="volunteer_email"
                 value="<%= volunteer.volunteer_email %>"
               />
-              <button type="submit">Add Administrative Privileges</button>
+              <button
+                type="submit"
+                style="
+                  background-color: #555; /* Neutral gray, similar to the Edit button */
+                  color: white;
+                  border: none;
+                  padding: 6px 20px; /* Increased padding for a wider button */
+                  font-size: 14px;
+                  cursor: pointer;
+                  border-radius: 4px;
+                  display: inline-block; /* Ensures the button text is on the same line */
+                "
+              >
+                Grant Access
+              </button>
             </form>
+
             <% } %>
           </td>
           <td>
@@ -143,9 +158,25 @@
             <form
               action="/editVolunteer/<%= volunteer.volunteer_id %>"
               method="GET"
-              style="display: inline"
+              style="
+                display: inline;
+                margin-right: 10px; /* Spacing between buttons */
+              "
             >
-              <button type="submit">Edit</button>
+              <button
+                type="submit"
+                style="
+                  background-color: #555; /* Neutral gray to differentiate from the delete button */
+                  color: white;
+                  border: none;
+                  padding: 6px 12px;
+                  font-size: 14px;
+                  cursor: pointer;
+                  border-radius: 4px;
+                "
+              >
+                Edit
+              </button>
             </form>
             <br /><br />
             <!-- Delete Button -->
@@ -159,7 +190,7 @@
                 aria-label="Delete Volunteer"
                 onclick="return confirm('Are you sure you want to delete this volunteer? This action cannot be undone.');"
                 style="
-                  background-color: #e74c3c;
+                  background-color: #e74c3c; /* Red color for deletion for immediate visual distinction */
                   color: white;
                   border: none;
                   padding: 6px 12px;
@@ -182,7 +213,7 @@
     </table>
     <div class="form-buttons">
       <form action="/application" method="GET">
-        <button type="submit">Grant Access</button>
+        <button type="submit">Add Volunteer</button>
       </form>
       <form action="/" method="GET">
         <button type="submit">Home</button>
