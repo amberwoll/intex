@@ -110,11 +110,17 @@
                 </td>
                 <td>
                   <% if (requested_event.status_id === '1' || requested_event.status_id === '2') { %>
-                    <input type="datetime-local" id="event_start_<%= requested_event.event_number %>" name="event_start" value="<%= requested_event.event_start %>" required>
+                    <% if (requested_event.event_start) { %>
+                      <!-- If event_start exists, display it as text -->
+                      <span><%= requested_event.event_start %></span>
+                    <% } else { %>
+                      <!-- If event_start doesn't exist, show the input field to allow editing -->
+                      <input type="datetime-local" id="event_start_<%= requested_event.event_number %>" name="event_start" value="<%= requested_event.event_start %>" required>
+                    <% } %>
                   <% } else { %>
                     <span>Only for completed or approved events</span>
                   <% } %>
-                </td>
+                </td>      
                 <td>
                   <% if (requested_event.status_id === '1' || requested_event.status_id === '2') { %>
                     <button type="submit">Save</button>

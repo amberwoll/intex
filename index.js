@@ -137,7 +137,7 @@ app.get("/requested_event", isAuthenticated, (req, res) => {
       'requested_event.size_of_space',
       'status.status_description',
       'requested_event.status_id',
-      'completed_event.event_start'  // Include the current status_id
+      'completed_event.event_start' 
     )
     .then((requested_events) => {
       if (!requested_events.length) {
@@ -461,24 +461,34 @@ app.post("/editVolunteer/:id", (req, res) => {
 
 app.post('/updateEventStatus/:event_number', async (req, res) => {
   const event_number = parseInt(req.params.event_number, 10); // Extract the event number from the URL
-  const { status_id } = req.body; // Extract the status ID from the form submission
+  const { status_id, event_start } = req.body; // Extract the status ID and event start datetime from the form submission
 
   try {
     // Use a transaction for consistency
     await knex.transaction(async (trx) => {
-      // Update the status in the `requested_events` table
+      // Update the status in the `requested_event` table
       await trx('requested_event')
         .where({ event_number: event_number })
         .update({ status_id });
 
-      // Check if the event exists in the `completed_events` table
-      const completed_event = await trx('completed_event')
-        .where({ event_number: event_number })
-        .first();
+      // Check if the event status is either 'approved' or 'completed'
+      if (status_id === '1' || status_id === '2') {
+        // Check if the event exists in the `completed_event` table
+        const completed_event = await trx('completed_event')
+          .where({ event_number: event_number })
+          .first();
 
-      // If not found, insert a new row
-      if (!completed_event) {
-        await trx('completed_event').insert({ event_number: event_number });
+        // If not found, insert a new row
+        if (!completed_event) {
+          await trx('completed_event').insert({ event_number: event_number });
+        }
+
+        // If the event start is provided (not null or undefined), update it in the `completed_event` table
+        if (!event_start) {
+          await trx('completed_event')
+            .where({ event_number: event_number })
+            .update({ event_start: event_start });
+        }
       }
     });
 
@@ -489,6 +499,8 @@ app.post('/updateEventStatus/:event_number', async (req, res) => {
     res.status(500).send('Internal Server Error');
   }
 });
+
+
 
 //login page
 // get function to show existing users and by able to add and delete and edit roles
