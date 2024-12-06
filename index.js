@@ -494,7 +494,7 @@ app.get('/add_login', (req, res) => {
 
 
 app.post('/add_login', (req, res) => {
-  const { volunteer_email, role, password } = req.body;
+  const { volunteer_email, role_id, user_password } = req.body;
 
   knex('login')
     .insert({ volunteer_email: volunteer_email, role_id: role_id, user_password: user_password })
