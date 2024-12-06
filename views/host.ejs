@@ -48,15 +48,14 @@
     </style>
 </head>
 <body>
-    <nav>
-        <div class="nav-container">
-            <a href="/" class="project-name">Turtle Shelter Project</a>
-            <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="/application">Volunteer Application</a></li>
-            </ul>
-        </div>
-    </nav>
+    <div class="button-bar">
+        <form action="/" method="GET">
+            <button type="submit">Home</button>
+        </form>
+        <form action="/application" method="GET">
+            <button type="submit">Volunteer Application</button>
+        </form>
+      </div>
     <h1>Event Request Form</h1>
     <form action="/host" method="POST">
         <!-- Main/Host Contact Info -->
