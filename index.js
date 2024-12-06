@@ -266,6 +266,7 @@ app.get('/update_completed_events/:event_number', isAuthenticated, (req, res) =>
   let event_number = req.params.event_number;
   // Collect event details from requested_event
   knex('requested_event')
+    .join("completed_event", "request_event.event_number", '=', 'completed_event.event_number')
     .where('event_number', event_number)
     .first() // Get single event
     .then(requested_event => {
@@ -589,6 +590,7 @@ app.post('/admin_login', async (req, res) => {
 app.get('/admin_landing', isAuthenticated, (req, res) => {
   res.render('admin_landing'); 
 });
+
 
 
 // START SERVER

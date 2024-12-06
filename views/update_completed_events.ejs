@@ -10,7 +10,7 @@
     <form action="/save_completed_events/<%= requested_event.event_number %>" method="POST">
         <!-- Event Start -->
         <label for="event_start">What Time did the Event Start:</label>
-        <input type="datetime-local" id="event_start" name="event_start" required><br>
+        <input type="datetime-local" id="event_start" name="event_start" value="<%= requested_event.event_start %>" required><br>
 
         <!-- Number of Participants -->
         <label for="number_of_participants">How Many Participants Attended:</label>
