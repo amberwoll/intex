@@ -267,7 +267,7 @@ app.get('/update_completed_events/:event_number', isAuthenticated, (req, res) =>
   // Collect event details from requested_event
   knex('requested_event')
     .leftJoin("completed_event", "requested_event.event_number", '=', 'completed_event.event_number')
-    .where('event_number', event_number)
+    .where('requested_event.event_number', event_number)
     .first() // Get single event
     .then(requested_event => {
       if (!requested_event) {
