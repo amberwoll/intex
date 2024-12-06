@@ -9,21 +9,7 @@
             margin: 0;
             padding: 0;
             font-family: Arial, sans-serif;
-            background-size: cover;
-            color: white;
-            min-height: 100vh;
-        }
-        h1 {
-            text-align: center;
-            margin-top: 20px;
-        }
-        .button-bar {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-top: 20px;
-        }
-        button {
+
             background-color: rgba(0, 0, 0, 0.7);
             color: white;
             border: none;
@@ -32,77 +18,12 @@
             border-radius: 5px;
             cursor: pointer;
             transition: background-color 0.3s ease;
-            margin: 0 10px;
-        }
-        button:hover {
-            background-color: rgba(255, 255, 255, 0.7);
-            color: black;
-        }
-        .tableauPlaceholder {
-            width: 100%;
-            max-width: 1100px;
-            margin: 20px auto;
-        }
-        p {
-            text-align: center;
-            max-width: 800px;
-            margin: 20px auto;
+
         }
     </style>
 </head>
 <body>
-    <h1>Landing</h1>
-    <div class="button-bar">
-        <form action="/requested_event" method="GET">
-            <button type="submit">Requested Events</button>
-        </form>
-        <form action="/completed_events" method="GET">
-            <button type="submit">Completed Events</button>
-        </form>
-        <form action="/volunteers" method="GET">
-            <button type="submit">Volunteer Management</button>
-        </form>
-        <form action="/login" method="GET">
-            <button type="submit">Edit User Accounts</button>
-        </form>
-    </div>
 
-    <!-- Tableau Dashboard Visualization -->
-    <div class="tableauPlaceholder" id="viz1733457525495">
-        <object class="tableauViz" style="display:none;">
-            <param name="host_url" value="https%3A%2F%2Fpublic.tableau.com%2F" />
-            <param name="embed_code_version" value="3" />
-            <param name="path" value="shared%2FSX2XJX5KD" />
-            <param name="toolbar" value="yes" />
-            <param name="static_image" value="https://public.tableau.com/static/images/SX/SX2XJX5KD/1.png" />
-            <param name="animate_transition" value="yes" />
-            <param name="display_static_image" value="yes" />
-            <param name="display_spinner" value="yes" />
-            <param name="display_overlay" value="yes" />
-            <param name="display_count" value="yes" />
-            <param name="language" value="en-US" />
-        </object>
-        <script type="text/javascript" src="https://public.tableau.com/javascripts/api/viz_v1.js"></script>
-    </div>
-
-    <p>The chart below shows the average number of children, non-sewers, and sewers at the organization’s events, along with the event duration and the number of sewing machines needed. Checking the dashboard before hosting an event is recommended, as it provides key details on attendance and equipment requirements. Use the dropdown menu to select the organization.</p>
-
-    <div class="tableauPlaceholder" id="viz1733461446977">
-        <object class="tableauViz" style="display:none;">
-            <param name="host_url" value="https%3A%2F%2Fpublic.tableau.com%2F" />
-            <param name="embed_code_version" value="3" />
-            <param name="path" value="shared%2FQHB4BFG2J" />
-            <param name="toolbar" value="yes" />
-            <param name="static_image" value="https://public.tableau.com/static/images/QH/QHB4BFG2J/1.png" />
-            <param name="animate_transition" value="yes" />
-            <param name="display_static_image" value="yes" />
-            <param name="display_spinner" value="yes" />
-            <param name="display_overlay" value="yes" />
-            <param name="display_count" value="yes" />
-            <param name="language" value="en-US" />
-            <param name="filter" value="publish=yes" />
-        </object>
-        <script type="text/javascript" src="https://public.tableau.com/javascripts/api/viz_v1.js"></script>
     </div>
 </body>
 </html>
