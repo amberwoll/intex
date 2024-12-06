@@ -143,6 +143,15 @@ app.get("/requested_event", isAuthenticated, (req, res) => {
       if (!requested_events.length) {
         return res.status(404).send('No events found');
       }
+
+      // Convert event_start for each event before passing to the view
+      requested_events = requested_events.map(event => {
+        if (event.event_start) {
+          event.event_start = new Date(event.event_start).toISOString().slice(0, 16); // Format the date as needed
+        }
+        return event;
+      });
+
       knex('status')
         .select('status_id', 'status_description')
         .then(event_status => {
@@ -154,6 +163,7 @@ app.get("/requested_event", isAuthenticated, (req, res) => {
       res.status(500).send("Internal Server Error: requested_event .get");
     });
 });
+
 
 // Route to edit requests
 
