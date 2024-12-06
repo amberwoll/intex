@@ -183,7 +183,7 @@ app.post('/host', (req, res) => {
   const phone = req.body.phone || '';
   const host_email = req.body.host_email; 
   const organization = req.body.organization || ''; 
-  const description = req.body.description || ''; 
+  const event_description = req.body.description || ''; 
   const street = req.body.street || ''; 
   const city = req.body.city || ''; 
   const state = req.body.state || ''; 
@@ -214,14 +214,15 @@ app.post('/host', (req, res) => {
 
       // Insert into 'requested_events' table, using the retrieved 'host_id'
       await trx('requested_event').insert({
-        host_id: host_id,
+        host_id: parseInt(host_id, 10),
         organization,
-        description,
+        event_description,
         street,
         city,
         state,
         zip,
         possible_date_1,
+        possible_date_2,
         event_length,
         sewing_abbreviation,
         number_of_sewers,
