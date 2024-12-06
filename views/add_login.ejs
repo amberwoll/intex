@@ -42,28 +42,34 @@
 <body>
   <h1>Add Login</h1>
   <form action="/add_login" method="POST">
+    <!-- Pre-fill volunteer email -->
     <label for="volunteer_email">Volunteer Email:</label>
     <input
-        type="text"
-        id="volunteer_email"
-        name="volunteer_email"
-        value="<%= volunteerEmail || '' %>"
-        readonly
-        >
+      type="text"
+      id="volunteer_email"
+      name="volunteer_email"
+      value="<%= volunteerEmail || '' %>"
+      readonly
+    />
+    <br><br>
+
+    <!-- Dropdown for role selection -->
     <label for="role">Role:</label>
-    <form action="/login/<%= login.volunteer_email %>" method="POST">
-        <select id="role_id" name="role_id">
-          <% role.forEach(row => { %>
-            <option 
-              value="<%= row.role_id %>" 
-              <%= row.position_title %>
-            </option>
-          <% }) %>
-        </select>
-        <button type="submit">Save</button>
-      </form>   
-    <br>
+    <select id="role_id" name="role_id">
+      <% role.forEach(row => { %>
+        <option value="<%= row.role_id %>">
+          <%= row.position_title %>
+        </option>
+      <% }) %>
+    </select>
+    <br><br>
+
+    <!-- Input for user password -->
     <label for="user_password">Password:</label>
+    <input type="password" id="user_password" name="user_password" required />
+    <br><br>
+
+    <!-- Submit button -->
     <button type="submit">Add Login</button>
   </form>
 </body>
