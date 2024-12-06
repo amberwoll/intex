@@ -490,6 +490,19 @@ app.get('/login', (req, res) => {
 });
 
 
+app.post('/login/:volunteer_email', (req, res) => {
+  knex('login')
+  .where({volunteer_email: volunteer_email})
+  .update(
+    role_id
+  )
+  .then(() => res.redirect('/login'))
+  .catch((error) => {
+    console.error("Error fetching login 2:", error.message);
+    res.status(500).send("Internal Server Error login 2");
+  })
+})
+
 app.get('/add_login', (req, res) => {
   const volunteerEmail = req.query.volunteer_email;
   knex('v_role')
