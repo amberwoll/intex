@@ -48,14 +48,14 @@
 </head>
 <body>
     <h1>Event Request Form</h1>
-    <p>Thank you for your interest in helping us save lives and accomplish our goal! 
-        Fill our your information below and we will be in touch about the details. 
-        Please be aware that we are nearly fully booked for about 6 months in advance,
-        but we will do all that we can to accomodate you as soon as we can. 
-        Please note that contact info should be for the primary point of contact for the event.
-    </p>
     <form action="/host" method="POST">
         <!-- Main/Host Contact Info -->
+        <p>Thank you for your interest in helping us save lives and accomplish our goal! 
+            Fill our your information below and we will be in touch about the details. 
+            Please be aware that we are nearly fully booked for about 6 months in advance,
+            but we will do all that we can to accomodate you as soon as we can. 
+            Please note that contact info should be for the primary point of contact for the event.
+        </p>
         <label for="first_name">First Name:</label>
         <input type="text" id="first_name" name="first_name" required style="text-transform: uppercase;" oninput="this.value = this.value.toUpperCase()">
         <label for="last_name">Last Name:</label>
