@@ -115,6 +115,7 @@ app.get("/requested_event", isAuthenticated, (req, res) => {
     .join('host', 'requested_event.host_id', '=', 'host.host_id')
     .join('sewing_activity', 'requested_event.sewing_abbreviation', '=', 'sewing_activity.sewing_abbreviation')
     .join('status', 'requested_event.status_id', '=', 'status.status_id')
+    .leftJoin('completed_event', 'requested_event.event_number', '=', 'completed_event.event_number')
     .select(
       'requested_event.event_number',
       knex.raw("CONCAT(host.first_name, ' ', host.last_name) AS host"),
@@ -135,7 +136,8 @@ app.get("/requested_event", isAuthenticated, (req, res) => {
       'requested_event.jen_story',
       'requested_event.size_of_space',
       'status.status_description',
-      'requested_event.status_id'  // Include the current status_id
+      'requested_event.status_id',
+      'completed_event.event_start'  // Include the current status_id
     )
     .then((requested_events) => {
       if (!requested_events.length) {
@@ -464,46 +466,26 @@ app.post('/updateEventStatus/:event_number', async (req, res) => {
   try {
     // Use a transaction for consistency
     await knex.transaction(async (trx) => {
-      // Update the status in the `requested_event` table
+      // Update the status in the `requested_events` table
       await trx('requested_event')
         .where({ event_number: event_number })
         .update({ status_id });
 
-      // Check if the event exists in the `completed_event` table
+      // Check if the event exists in the `completed_events` table
       const completed_event = await trx('completed_event')
         .where({ event_number: event_number })
         .first();
 
-      // If the status is approved or completed and no row exists in completed_event, insert a new row
-      if ((status_id === 'approved' || status_id === 'completed') && !completed_event) {
-        await trx('completed_event').insert({
-          event_number: event_number,
-          status_date: null, // Set to null initially, will be updated manually by the user
-        });
+      // If not found, insert a new row
+      if (!completed_event) {
+        await trx('completed_event').insert({ event_number: event_number });
       }
     });
 
-    // If the status is approved or completed, send a success response
-    res.json({ success: true, message: 'Event status updated and row created in completed_event.' });
+    // Redirect back to the requested events page or send a success response
+    res.redirect('/requested_event');
   } catch (error) {
     console.error('Error updating event status:', error);
-    res.status(500).send('Internal Server Error');
-  }
-});
-
-app.post('/updateStatusDate/:event_number', async (req, res) => {
-  const event_number = parseInt(req.params.event_number, 10);
-  const { status_date } = req.body;
-
-  try {
-    // Update the completed_event table with the selected status date
-    await knex('completed_event')
-      .where({ event_number: event_number })
-      .update({ status_date });
-
-    res.status(200).send('Date saved successfully');
-  } catch (error) {
-    console.error('Error updating status date:', error);
     res.status(500).send('Internal Server Error');
   }
 });
