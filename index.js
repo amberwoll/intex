@@ -214,7 +214,7 @@ app.post('/host', (req, res) => {
 
       // Insert into 'requested_events' table, using the retrieved 'host_id'
       await trx('requested_event').insert({
-        host_id: host_id,
+        host_id: parseInt(host_id, 10),
         organization,
         event_description,
         street,
