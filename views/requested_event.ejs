@@ -63,6 +63,8 @@
           <th>Size of Space</th>
           <th>Jen Story</th>
           <th>Status</th>
+          <th>Chosen Event Start Date</th>
+          <th>Save</th>
         </tr>
       </thead>
       <tbody>
@@ -89,18 +91,24 @@
               <td><%= requested_event.jen_story %></td>
               <td>
                 <form action="/updateEventStatus/<%= requested_event.event_number %>" method="POST">
-                  <select id="status_id" name="status_id">
-                    <% event_status.forEach(description => { %>
-                      <option 
-                        value="<%= description.status_id %>" 
-                        <%= parseInt(requested_event.status_id, 10) === parseInt(description.status_id, 10) ? 'selected' : '' %>>
-                        <%= description.status_description %>
-                      </option>
-                    <% }) %>
-                  </select>
-                  <label for="event_start">Chosen Event Start Date</label>
-                  <input type="datetime-local" id="event_start" name="event_start" value="<%= requested_event.event_start %>" required>
-                  <button type="submit">Save</button>
+                  <td>
+                    <select id="status_id" name="status_id">
+                      <% event_status.forEach(description => { %>
+                        <option 
+                          value="<%= description.status_id %>" 
+                          <%= parseInt(requested_event.status_id, 10) === parseInt(description.status_id, 10) ? 'selected' : '' %>>
+                          <%= description.status_description %>
+                        </option>
+                      <% }) %>
+                    </select>
+                  </td>
+                  <td>
+                    <label for="event_start">Chosen Event Start Date</label>
+                    <input type="datetime-local" id="event_start" name="event_start" value="<%= requested_event.event_start %>" required>
+                  </td>
+                  <td>
+                    <button type="submit">Save</button>
+                  </td>
                 </form>                
               </td>
             </tr>
