@@ -128,14 +128,29 @@
             <span><%= volunteer.position %></span>
             <% } else { %>
             <!-- Otherwise, show the "Add Administrative Privileges" button -->
-            <form action="/add_login" method="GET">
+            <form action="/add_login" method="GET" style="display: inline">
               <input
                 type="hidden"
                 name="volunteer_email"
                 value="<%= volunteer.volunteer_email %>"
               />
-              <button type="submit">Grant Access</button>
+              <button
+                type="submit"
+                style="
+                  background-color: #555; /* Neutral gray, similar to the Edit button */
+                  color: white;
+                  border: none;
+                  padding: 6px 20px; /* Increased padding for a wider button */
+                  font-size: 14px;
+                  cursor: pointer;
+                  border-radius: 4px;
+                  display: inline-block; /* Ensures the button text is on the same line */
+                "
+              >
+                Grant Access
+              </button>
             </form>
+
             <% } %>
           </td>
           <td>
@@ -163,6 +178,7 @@
                 Edit
               </button>
             </form>
+            <br /><br />
             <!-- Delete Button -->
             <form
               action="/deleteVolunteer/<%= volunteer.volunteer_email %>"
