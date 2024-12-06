@@ -573,8 +573,7 @@ app.post('/admin_login', async (req, res) => {
 });
 
 app.get('/admin_landing', (req, res) => {
-  // Render an admin landing page or return a response
-  res.render('admin_landing'); // Assuming you have an `admin_landing.ejs` view
+  res.render('admin_landing'); 
 });
 
 
