@@ -110,7 +110,7 @@ app.post("/application", (req, res) => {
 
 // REQUESTED EVENTS PAGE
 // Route to display requested events page
-app.get("/requested_event", (req, res) => {
+app.get("/requested_event", isAuthenticated, (req, res) => {
   knex("requested_event")
     .join('host', 'requested_event.host_id', '=', 'host.host_id')
     .join('sewing_activity', 'requested_event.sewing_abbreviation', '=', 'sewing_activity.sewing_abbreviation')
@@ -239,7 +239,7 @@ app.post('/host', (req, res) => {
 
 // COMPLETED EVENTS PAGE
 // Route to display completed events page
-app.get('/completed_events', (req, res) => {
+app.get('/completed_events', isAuthenticated, (req, res) => {
   knex('requested_event')
     .join('host', 'requested_event.host_id', '=', 'host.host_id')
     .select(
@@ -260,7 +260,7 @@ app.get('/completed_events', (req, res) => {
     });
 });
 // Route to edit completed events
-app.get('/update_completed_events/:event_number', (req, res) => {
+app.get('/update_completed_events/:event_number', isAuthenticated, (req, res) => {
   let event_number = req.params.event_number;
   // Collect event details from requested_event
   knex('requested_event')
@@ -315,7 +315,7 @@ app.post('/save_completed_events/:event_number', (req, res) => {
 
 // VOLUNTEERS PAGE
 // Route to display the volunteers page
-app.get("/volunteers", (req, res) => {
+app.get("/volunteers", isAuthenticated, (req, res) => {
   knex("volunteer")
     .join("reference", "volunteer.reference_id", "=", "reference.reference_id") // Join with the reference table
     .join("sewing_activity", "volunteer.preference", "=", "sewing_activity.sewing_abbreviation") // Join with sewing levels
@@ -372,7 +372,7 @@ app.post("/deleteVolunteer/:volunteer_email", (req, res) => {
 
 
 // Route to display the edit page
-app.get("/editVolunteer/:id", (req, res) => {
+app.get("/editVolunteer/:id", isAuthenticated, (req, res) => {
   const { id } = req.params;
 
   knex("volunteer")
@@ -523,7 +523,7 @@ app.post('/login/:volunteer_email', (req, res) => {
   })
 });
 
-app.get('/add_login', (req, res) => {
+app.get('/add_login', isAuthenticated, (req, res) => {
   const volunteerEmail = req.query.volunteer_email;
   knex('v_role')
   .then((role) => {
@@ -572,7 +572,7 @@ app.post('/admin_login', async (req, res) => {
   }
 });
 
-app.get('/admin_landing', (req, res) => {
+app.get('/admin_landing', isAuthenticated, (req, res) => {
   res.render('admin_landing'); 
 });
 
