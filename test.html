@@ -1,107 +1,109 @@
+<!-- the landing page -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Host Form</title>
+    <title>My App</title>
+
     <style>
-        form {
-            width: 60%;
-            margin: 20px auto;
-            padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 10px;
-            background-color: #F9F9F9;
-            font-size: 14px;
-        }
-        label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: bold;
-        }
-        input,
-        button {
-            width: 100%;
-            padding: 8px;
-            margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-        input[type="checkbox"],
-        input[type="radio"] {
-            width: auto;
-            margin-right: 5px;
-        }
-        button {
-            background-color: #4CAF50;
-            color: white;
-            font-size: 14px;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #45A049;
-        }
-        h1 {
-            text-align: center;
-        }
+
+        /* Navigation bar */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: #faefe0;
+    color: #f7bcba;
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Ensure it stays above other content */
+    flex-direction: column; /* Stack links and brand vertically */
+}
+
+.navbar-content {
+    text-align: center;
+}
+
+.navbar-brand {
+    font-size: 2.5em;
+    font-weight: bold;
+    font-family: Georgia, serif;
+}
+
+.navbar-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    background-color: #faefe0;
+    padding: 10px 15px;
+    transition: background-color 0.3s;
+}
+
+.navbar-links a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1em;
+    background-color: #f7bcba; 
+    padding: 10px 20px; /* Button padding */
+    border-radius: 8px; /* Rounded corners */
+    transition: background-color 0.3s;
+    display: inline-block;
+    font-weight: bold; /* Make text bold for better readability */
+}
+
+.navbar-links a:hover {
+    background-color: #f5aeac; /* Darker pink on hover */
+}
+
+/* Add padding to the top of the page content to avoid overlap */
+.content {
+    padding-top: 140px; /* Adjust this based on the height of your navbar */
+}
+
     </style>
+
+
 </head>
 <body>
-    <h1>Host Form</h1>
-    <form>
-        <!-- Main/Host Contact Info -->
-        <label for="first_name">First Name:</label>
-        <input type="text" id="first_name" name="first_name" required style="text-transform: uppercase;" oninput="this.value = this.value.toUpperCase()">
-        <label for="last_name">Last Name:</label>
-        <input type="text" id="last_name" name="last_name" required style="text-transform: uppercase;" oninput="this.value = this.value.toUpperCase()">
-        <label for="phone">Phone Number:</label>
-        <input type="text" id="phone" name="phone" required>
-        <label for="host_email">Email:</label>
-        <input type="text" id="host_email" name="host_email" required>
-        <!-- Event Details -->
-        <label for="organization">Organization:</label>
-        <input type="text" id="organization" name="organization" required style="text-transform: uppercase;" oninput="this.value = this.value.toUpperCase()">
-        <label for="description">Description:</label>
-        <input type="text" id="description" name="description" required>
-        <!-- Event Location -->
-        <label for="street">Street:</label>
-        <input type="text" id="street" name="street" required style="text-transform: uppercase;" oninput="this.value = this.value.toUpperCase()">
-        <label for="city">City:</label>
-        <input type="text" id="city" name="city" required style="text-transform: uppercase;" oninput="this.value = this.value.toUpperCase()">
-        <label for="state">State:</label>
-        <input type="text" id="state" name="state" required style="text-transform: uppercase;" oninput="this.value = this.value.toUpperCase()">
-        <label for="zip">Zip:</label>
-        <input type="text" id="zip" name="zip" required>
-        <!-- Possible Event Dates -->
-        <label for="possible_date_1">Possible Date 1:</label>
-        <input type="datetime-local" id="possible_date_1" name="possible_date_1" required>
-        <label for="possible_date_2">Possible Date 2:</label>
-        <input type="datetime-local" id="possible_date_2" name="possible_date_2" required>
-        <!-- Event Length -->
-        <label for="event_length">Event Length (Hours):</label>
-        <input type="number" step="0.5" id="event_length" name="event_length" required>
-        <!-- Activity Type -->
-        <label>Select Type of Activity:</label>
-        <label><input type="radio" name="sewing_abbreviation" value="S" checked> Sewing</label>
-        <label><input type="radio" name="sewing_abbreviation" value="N"> Non-Sewing</label>
-        <label><input type="radio" name="sewing_abbreviation" value="B"> Both</label>
-        <!-- Types of Participants -->
-        <label for="number_of_sewers">Number of Sewers:</label>
-        <input type="number" step="1" id="number_of_sewers" name="number_of_sewers" required>
-        <label for="number_of_nonsewers">Number of Non-Sewers:</label>
-        <input type="number" step="1" id="number_of_nonsewers" name="number_of_nonsewers" required>
-        <label for="number_of_children">Number of Children (Less than 10):</label>
-        <input type="number" step="1" id="number_of_children" name="number_of_children" required>
-        <!-- Sewing Machines -->
-        <label for="machine">Number of People Bringing Machines:</label>
-        <input type="number" step="1" id="machine" name="machine" required>
-        <!-- Jen's Story -->
-        <label>
-            <input type="checkbox" id="jen_story" name="jen_story" value="true">
-            Would you like to hear Jen's Story?
-        </label>
-        <!-- Submit Button -->
-        <button type="submit">Submit Application</button>
+    <h1>Test 3</h1>
+    
+    
+    <form action="/application" method="GET">
+        <button type="submit">Team Member Application</button>
     </form>
+    <form action="/host" method="GET">
+        <button type="submit">Host</button>
+    </form>
+    <form action="/admin_login" method="GET">
+        <button type="submit">Admin Login</button>
+    </form>
+    <script type="text/javascript">
+        var divElement = document.getElementById('viz1733349072150');
+        var vizElement = divElement.getElementsByTagName('object')[0];
+    
+        if (divElement.offsetWidth > 800) {
+            vizElement.style.minWidth = '1000px';
+            vizElement.style.maxWidth = '100%';
+            vizElement.style.minHeight = '850px';
+            vizElement.style.maxHeight = (divElement.offsetWidth * 0.75) + 'px';
+        } else if (divElement.offsetWidth > 500) {
+            vizElement.style.minWidth = '1000px';
+            vizElement.style.maxWidth = '100%';
+            vizElement.style.minHeight = '850px';
+            vizElement.style.maxHeight = (divElement.offsetWidth * 0.75) + 'px';
+        } else {
+            vizElement.style.width = '100%';
+            vizElement.style.minHeight = '750px';
+            vizElement.style.maxHeight = (divElement.offsetWidth * 1.77) + 'px';
+        }
+    
+        var scriptElement = document.createElement('script');
+        scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+        vizElement.parentNode.insertBefore(scriptElement, vizElement);
+    </script>
 </body>
 </html>
