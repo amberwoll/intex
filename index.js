@@ -528,7 +528,7 @@ app.post('/add_login', (req, res) => {
 });
 
 app.get('/admin_login', (res, req) => {
-
+  res.redirect('/admin');
 });
 
 app.post('/admin_login', (req, res) => {
