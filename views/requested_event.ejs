@@ -9,25 +9,32 @@
         width: 100%;
         margin: 20px auto;
         border-collapse: collapse;
-        font-size: 12px;
+        font-size: 14px;
       }
-      th, td {
+      th,
+      td {
         border: 1px solid #ddd;
         padding: 8px;
         text-align: center;
+        line-height: 1.4;
       }
       th {
-        background-color: #f2f2f2;
+        background-color: #f9f9f9;
         font-weight: bold;
       }
       button {
-        padding: 4px 8px;
-        margin: 2px;
-        font-size: 12px;
+        padding: 6px 12px;
+        font-size: 14px;
         cursor: pointer;
+        margin: 2px;
       }
       h1 {
         text-align: center;
+        margin: 20px 0;
+      }
+      .form-buttons {
+        display: flex;
+        justify-content: center;
         margin: 20px 0;
       }
       .form-container {
@@ -35,13 +42,13 @@
         justify-content: center;
         margin: 20px 0;
       }
+      .hidden {
+        display: none;
+      }
     </style>
   </head>
   <body>
     <h1>Requested Events</h1>
-    <form action="/" method="GET">
-      <button type="submit">Home</button>
-    </form>
     <table>
       <thead>
         <tr>
@@ -64,14 +71,14 @@
           <th>Jen Story</th>
           <th>Status</th>
           <th>Chosen Event Start Date</th>
-          <th>Save</th>
+          <th>Actions</th>
         </tr>
       </thead>
       <tbody>
         <% if (requested_events.length > 0) { %>
           <% requested_events.forEach(requested_event => { %>
             <tr>
-              <input type="hidden" value="requested_event.event_number">
+              <input type="hidden" value="<%= requested_event.event_number %>">
               <td><%= requested_event.host %></td>
               <td><%= requested_event.organization %></td>
               <td><%= requested_event.event_description %></td>
@@ -91,7 +98,7 @@
               <td><%= requested_event.jen_story %></td>
               <form action="/updateEventStatus/<%= requested_event.event_number %>" method="POST">
                 <td>
-                  <select id="status_id" name="status_id">
+                  <select id="status_id_<%= requested_event.event_number %>" name="status_id">
                     <% event_status.forEach(description => { %>
                       <option 
                         value="<%= description.status_id %>" 
@@ -102,21 +109,37 @@
                   </select>
                 </td>
                 <td>
-                  <label for="event_start">Chosen Event Start Date</label>
-                  <input type="datetime-local" id="event_start" name="event_start" value="<%= requested_event.event_start %>" required>
+                  <% if (requested_event.status_id === 'approved' || requested_event.status_id === 'completed') { %>
+                    <input type="datetime-local" id="event_start_<%= requested_event.event_number %>" name="event_start" value="<%= requested_event.event_start %>" required>
+                  <% } else { %>
+                    <span>Only for completed or approved events</span>
+                  <% } %>
                 </td>
                 <td>
-                  <button type="submit">Save</button>
+                  <% if (requested_event.status_id === 'approved' || requested_event.status_id === 'completed') { %>
+                    <button type="submit">Save</button>
+                  <% } else { %>
+                    <button type="submit" disabled>Save</button>
+                  <% } %>
                 </td>
               </form>                
             </tr>
           <% }) %>
         <% } else { %>
           <tr>
-            <td colspan="7">No data available</td>
+            <td colspan="20">No data available</td>
           </tr>
         <% } %>
       </tbody>
     </table>
+
+    <div class="form-buttons">
+      <form action="/addRequestedEvent" method="GET">
+        <button type="submit">Add New Event</button>
+      </form>
+      <form action="/" method="GET">
+        <button type="submit">Home</button>
+      </form>
+    </div>
   </body>
 </html>
