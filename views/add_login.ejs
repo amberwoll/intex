@@ -56,7 +56,6 @@
           <% role.forEach(row => { %>
             <option 
               value="<%= row.role_id %>" 
-              <%= parseInt(login.role_id, 10) === parseInt(row.role_id, 10) ? 'selected' : '' %>>
               <%= row.position_title %>
             </option>
           <% }) %>
