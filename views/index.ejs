@@ -1,74 +1,113 @@
-<!-- the landing page -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My App</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: url('../pictures/homepage.jpg') no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-around;
+            min-height: 100vh;
+            color: white;
+        }
 
-    
+        .top-right {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
 
+        .top-right button {
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
 
+        .top-right button:hover {
+            background-color: rgba(255, 255, 255, 0.7);
+            color: black;
+        }
+
+        .bottom-buttons {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .bottom-buttons form {
+            margin: 0 10px;
+        }
+
+        .bottom-buttons button {
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 18px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .bottom-buttons button:hover {
+            background-color: rgba(255, 255, 255, 0.7);
+            color: black;
+        }
+
+        .new-section {
+            width: 80%;
+            padding: 40px;
+            background-color: rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .new-section h1 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        .new-section p {
+            font-size: 20px;
+            line-height: 1.5;
+        }
+    </style>
 </head>
 <body>
-    <h1>Test 3</h1>
-    <div class="tableauPlaceholder" id="viz1733349072150" style="position: relative">
-        <noscript>
-            <a href="#">
-                <img alt=" " src="https://public.tableau.com/static/images/Te/TestDashboard_17333488828330/Dashboard1/1_rss.png" style="border: none" />
-            </a>
-        </noscript>
-        <object class="tableauViz" style="display:none;">
-            <param name="host_url" value="https%3A%2F%2Fpublic.tableau.com%2F" />
-            <param name="embed_code_version" value="3" />
-            <param name="site_root" value="" />
-            <param name="name" value="TestDashboard_17333488828330/Dashboard1" />
-            <param name="tabs" value="yes" />
-            <param name="toolbar" value="yes" />
-            <param name="static_image" value="https://public.tableau.com/static/images/Te/TestDashboard_17333488828330/Dashboard1/1.png" />
-            <param name="animate_transition" value="yes" />
-            <param name="display_static_image" value="yes" />
-            <param name="display_spinner" value="yes" />
-            <param name="display_overlay" value="yes" />
-            <param name="display_count" value="yes" />
-            <param name="language" value="en-US" />
-            <param name="filter" value="publish=yes" />
-        </object>
+    <div class="top-right">
+        <form action="/admin_login" method="GET">
+            <button type="submit">Admin Login</button>
+        </form>
     </div>
-    
-    <form action="/application" method="GET">
-        <button type="submit">Team Member Application</button>
-    </form>
-    <form action="/host" method="GET">
-        <button type="submit">Host</button>
-    </form>
-    <form action="/admin_login" method="GET">
-        <button type="submit">Admin Login</button>
-    </form>
-    <script type="text/javascript">
-        var divElement = document.getElementById('viz1733349072150');
-        var vizElement = divElement.getElementsByTagName('object')[0];
-    
-        if (divElement.offsetWidth > 800) {
-            vizElement.style.minWidth = '1000px';
-            vizElement.style.maxWidth = '100%';
-            vizElement.style.minHeight = '850px';
-            vizElement.style.maxHeight = (divElement.offsetWidth * 0.75) + 'px';
-        } else if (divElement.offsetWidth > 500) {
-            vizElement.style.minWidth = '1000px';
-            vizElement.style.maxWidth = '100%';
-            vizElement.style.minHeight = '850px';
-            vizElement.style.maxHeight = (divElement.offsetWidth * 0.75) + 'px';
-        } else {
-            vizElement.style.width = '100%';
-            vizElement.style.minHeight = '750px';
-            vizElement.style.maxHeight = (divElement.offsetWidth * 1.77) + 'px';
-        }
-    
-        var scriptElement = document.createElement('script');
-        scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
-        vizElement.parentNode.insertBefore(scriptElement, vizElement);
-    </script>
+    <div class="new-section">
+        <h1>Starts with you!</h1>
+        <p>Helping to save lives of people experiencing homelessness.</p>
+    </div>
+    <div class="bottom-buttons">
+        <form action="/application" method="GET">
+            <button type="submit">Volunteer Application</button>
+        </form>
+        <form action="/host" method="GET">
+            <button type="submit">Hosting An Event With Us</button>
+        </form>
+        <form action="https://turtleshelterproject.org/donate" method="GET">
+            <button type="submit">Donate</button>
+        </form>
+    </div>
 </body>
 </html>
